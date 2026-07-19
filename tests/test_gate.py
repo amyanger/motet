@@ -1,5 +1,3 @@
-import pytest
-
 from vexas.gate import is_grounded, normalize_for_match
 
 
