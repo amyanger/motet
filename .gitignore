@@ -6,3 +6,5 @@ __pycache__/
 CLAUDE.md
 data/cache/
 data/raw/
+*.egg-info/
+.superpowers/
