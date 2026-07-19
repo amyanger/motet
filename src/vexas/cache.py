@@ -7,7 +7,9 @@ outputs from colliding.
 
 import hashlib
 import json
+import os
 import re
+import tempfile
 from pathlib import Path
 
 from vexas.config import settings
@@ -39,11 +41,20 @@ class DiskCache:
 
     def put(self, key: str, value: str) -> None:
         # Write-then-rename so an interrupted write never leaves a
-        # half-written file that looks like a valid cache hit.
+        # half-written file that looks like a valid cache hit. The temp
+        # file gets a per-call unique name (in the same directory, so the
+        # rename stays atomic) so concurrent writers for the same key
+        # never collide on a shared temp path.
         path = self._path(key)
-        tmp = path.with_suffix(".tmp")
-        tmp.write_text(value, encoding="utf-8")
-        tmp.replace(path)
+        fd, tmp_name = tempfile.mkstemp(dir=self.dir, suffix=".tmp")
+        tmp = Path(tmp_name)
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as f:
+                f.write(value)
+            tmp.replace(path)
+        except BaseException:
+            tmp.unlink(missing_ok=True)
+            raise
 
     def get_json(self, key: str) -> object | None:
         raw = self.get(key)
