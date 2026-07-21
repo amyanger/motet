@@ -1,0 +1,23 @@
+<article>
+  <front>
+    <article-meta>
+      <article-id pub-id-type="pmc">PMC9999999</article-id>
+      <article-id pub-id-type="pmid">39012345</article-id>
+      <title-group>
+        <article-title>VEXAS syndrome presenting with chondritis</article-title>
+      </title-group>
+    </article-meta>
+  </front>
+  <body>
+    <sec>
+      <title>Introduction</title>
+      <p>VEXAS syndrome is caused by somatic <italic>UBA1</italic> mutations.</p>
+    </sec>
+    <sec>
+      <title>Case presentation</title>
+      <p>A 68-year-old man presented with recurrent fevers for six months,
+      followed by ear chondritis.</p>
+      <p>He was treated with prednisolone 40 mg daily, then ruxolitinib.</p>
+    </sec>
+  </body>
+</article>
