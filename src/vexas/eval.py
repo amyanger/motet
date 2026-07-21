@@ -235,3 +235,128 @@ def load_eval_file(path: Path) -> EvalDoc:
         contamination_check=raw.get("contamination_check", False),
         units=[_unit(u) for u in raw.get("units", [])],
     )
+
+
+CONTAMINATION_MAX_FIELDS = 2
+
+CATEGORY_COUNTS = (
+    "demographics", "timeline", "labs", "treatments",
+    "prior_diagnoses", "outcome", "reason_for_publication",
+)
+
+_LIST_CATEGORIES = ("timeline", "labs", "treatments", "prior_diagnoses")
+
+
+@dataclass
+class UnitScore:
+    per_category: dict[str, Counts]
+    axes: AxisScore
+    total_pred_fields: int
+
+    @property
+    def overall(self) -> Counts:
+        total = Counts()
+        for counts in self.per_category.values():
+            total = total + counts
+        return total
+
+
+def _single_as_dict(name: str, f: EvalField | None) -> dict[str, EvalField]:
+    return {name: f} if f is not None else {}
+
+
+def _count_pred_fields(unit: EvalUnit) -> int:
+    n = len(unit.demographics)
+    for cat in _LIST_CATEGORIES:
+        n += len(getattr(unit, cat))
+    n += 1 if unit.outcome is not None else 0
+    n += 1 if unit.reason_for_publication is not None else 0
+    return n
+
+
+def score_unit(gold: EvalUnit, pred: EvalUnit) -> UnitScore:
+    per_category: dict[str, Counts] = {}
+    axes = AxisScore()
+
+    # Scalars: demographics dict, plus the two single optional fields.
+    scalar_groups = {
+        "demographics": (gold.demographics, pred.demographics),
+        "outcome": (
+            _single_as_dict("outcome", gold.outcome),
+            _single_as_dict("outcome", pred.outcome),
+        ),
+        "reason_for_publication": (
+            _single_as_dict("reason_for_publication", gold.reason_for_publication),
+            _single_as_dict("reason_for_publication", pred.reason_for_publication),
+        ),
+    }
+    for cat, (g, p) in scalar_groups.items():
+        per_category[cat] = score_scalar_dict(g, p)
+        # Axis pairs for matched scalar keys.
+        for key, gold_field in g.items():
+            pred_field = p.get(key)
+            if pred_field is not None and values_match(gold_field, pred_field, key):
+                axes = axes + axis_accuracy([(gold_field, pred_field)])
+
+    # Lists.
+    for cat in _LIST_CATEGORIES:
+        counts, pairs = score_list(getattr(gold, cat), getattr(pred, cat), cat)
+        per_category[cat] = counts
+        axes = axes + axis_accuracy(pairs)
+
+    return UnitScore(
+        per_category=per_category,
+        axes=axes,
+        total_pred_fields=_count_pred_fields(pred),
+    )
+
+
+@dataclass
+class DocScore:
+    pmc_id: str
+    tier: str
+    contamination_check: bool
+    units: list[UnitScore]
+    abstained: bool | None
+
+    @property
+    def overall(self) -> Counts:
+        total = Counts()
+        for unit in self.units:
+            total = total + unit.overall
+        return total
+
+    @property
+    def axes(self) -> AxisScore:
+        total = AxisScore()
+        for unit in self.units:
+            total = total + unit.axes
+        return total
+
+
+def _pair_units(gold: EvalDoc, pred: EvalDoc) -> list[tuple[EvalUnit, EvalUnit]]:
+    """Pair gold and pred units by patient_id, falling back to position."""
+    by_id = {u.patient_id: u for u in pred.units}
+    empty = EvalUnit(patient_id="", text="")
+    pairs = []
+    for i, gold_unit in enumerate(gold.units):
+        pred_unit = by_id.get(gold_unit.patient_id)
+        if pred_unit is None:
+            pred_unit = pred.units[i] if i < len(pred.units) else empty
+        pairs.append((gold_unit, pred_unit))
+    return pairs
+
+
+def score_document(gold: EvalDoc, pred: EvalDoc) -> DocScore:
+    unit_scores = [score_unit(g, p) for g, p in _pair_units(gold, pred)]
+    abstained: bool | None = None
+    if gold.contamination_check:
+        predicted = sum(_count_pred_fields(u) for u in pred.units)
+        abstained = predicted <= CONTAMINATION_MAX_FIELDS
+    return DocScore(
+        pmc_id=gold.pmc_id,
+        tier=gold.tier,
+        contamination_check=gold.contamination_check,
+        units=unit_scores,
+        abstained=abstained,
+    )

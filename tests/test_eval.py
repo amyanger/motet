@@ -1,6 +1,10 @@
 import json
 
-from vexas.eval import AxisScore, Counts, EvalField, align_list, axis_accuracy, load_eval_file, score_list, score_scalar_dict, values_match
+from vexas.eval import (
+    AxisScore, Counts, EvalDoc, EvalField, EvalUnit, align_list, axis_accuracy,
+    load_eval_file, score_document, score_list, score_scalar_dict, score_unit,
+    values_match,
+)
 
 
 def _doc_dict():
@@ -211,3 +215,74 @@ def test_axis_experiencer_mismatch_is_incorrect():
 
 def test_axis_accuracy_none_when_no_pairs():
     assert axis_accuracy([]).accuracy is None
+
+
+def _unit(**kw):
+    base = dict(patient_id="p1", text="t")
+    base.update(kw)
+    return EvalUnit(**base)
+
+
+def test_score_unit_counts_across_categories():
+    gold = _unit(
+        demographics={"age": _f("68"), "sex": _f("male")},
+        timeline=[_f("fever"), _f("chondritis")],
+    )
+    pred = _unit(
+        demographics={"age": _f("68"), "sex": _f("male")},
+        timeline=[_f("fever")],  # missed chondritis
+    )
+    score = score_unit(gold, pred)
+    assert score.per_category["demographics"].tp == 2
+    assert score.per_category["timeline"].tp == 1
+    assert score.per_category["timeline"].fn == 1
+    assert score.overall.tp == 3
+    assert score.overall.fn == 1
+
+
+def test_score_unit_axes_span_scalars_and_lists():
+    gold = _unit(
+        demographics={"age": _f("68")},
+        timeline=[_f("lymphoma", certainty="hypothetical")],
+    )
+    pred = _unit(
+        demographics={"age": _f("68")},
+        timeline=[_f("lymphoma", certainty="positive")],  # axis miss
+    )
+    score = score_unit(gold, pred)
+    assert score.axes.total == 2   # age pair + lymphoma pair
+    assert score.axes.correct == 1  # only age's axes agree
+
+
+def test_score_unit_counts_predicted_fields():
+    pred = _unit(
+        demographics={"age": _f("68"), "sex": _f("male")},
+        treatments=[_f("ruxolitinib")],
+        outcome=_f("alive"),
+    )
+    score = score_unit(_unit(), pred)
+    assert score.total_pred_fields == 4
+
+
+def test_contamination_pass_when_prediction_is_near_empty():
+    gold_doc = EvalDoc("PMC1", None, "silver", None, True, [_unit()])
+    pred_doc = EvalDoc("PMC1", None, "silver", None, True,
+                       [_unit(demographics={"age": _f("70")})])
+    result = score_document(gold_doc, pred_doc)
+    assert result.abstained is True
+
+
+def test_contamination_fail_when_prediction_invents_a_patient():
+    gold_doc = EvalDoc("PMC1", None, "silver", None, True, [_unit()])
+    pred_doc = EvalDoc("PMC1", None, "silver", None, True, [_unit(
+        demographics={"age": _f("70"), "sex": _f("f"), "country": _f("US")},
+        timeline=[_f("fever")],
+    )])
+    result = score_document(gold_doc, pred_doc)
+    assert result.abstained is False
+
+
+def test_non_contamination_document_has_no_abstention_verdict():
+    gold_doc = EvalDoc("PMC1", None, "silver", None, False, [_unit()])
+    pred_doc = EvalDoc("PMC1", None, "silver", None, False, [_unit()])
+    assert score_document(gold_doc, pred_doc).abstained is None
