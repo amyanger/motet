@@ -334,6 +334,16 @@ class DocScore:
         return total
 
 
+@dataclass
+class TierReport:
+    tier: str
+    per_category: dict[str, Counts]
+    overall: Counts
+    axes: AxisScore
+    contamination_pass: int
+    contamination_total: int
+
+
 def _pair_units(gold: EvalDoc, pred: EvalDoc) -> list[tuple[EvalUnit, EvalUnit]]:
     """Pair gold and pred units by patient_id, falling back to position."""
     by_id = {u.patient_id: u for u in pred.units}
@@ -360,3 +370,70 @@ def score_document(gold: EvalDoc, pred: EvalDoc) -> DocScore:
         units=unit_scores,
         abstained=abstained,
     )
+
+
+def score_corpus(docs: list[DocScore]) -> dict[str, TierReport]:
+    reports: dict[str, TierReport] = {}
+    tiers: dict[str, list[DocScore]] = {}
+    for doc in docs:
+        tiers.setdefault(doc.tier, []).append(doc)
+
+    for tier, tier_docs in tiers.items():
+        per_category: dict[str, Counts] = {c: Counts() for c in CATEGORY_COUNTS}
+        overall = Counts()
+        axes = AxisScore()
+        c_pass = c_total = 0
+        for doc in tier_docs:
+            for cat in CATEGORY_COUNTS:
+                for unit in doc.units:
+                    per_category[cat] = per_category[cat] + unit.per_category.get(
+                        cat, Counts()
+                    )
+            overall = overall + doc.overall
+            axes = axes + doc.axes
+            if doc.contamination_check:
+                c_total += 1
+                c_pass += 1 if doc.abstained else 0
+        reports[tier] = TierReport(
+            tier=tier,
+            per_category=per_category,
+            overall=overall,
+            axes=axes,
+            contamination_pass=c_pass,
+            contamination_total=c_total,
+        )
+    return reports
+
+
+def _fmt_metric(value: float | None) -> str:
+    return f"{value:.2f}" if value is not None else "  --"
+
+
+def _fmt_counts(label: str, c: Counts) -> str:
+    p = f"P {_fmt_metric(c.precision)} ({c.tp}/{c.tp + c.fp})"
+    r = f"R {_fmt_metric(c.recall)} ({c.tp}/{c.tp + c.fn})"
+    f = f"F1 {_fmt_metric(c.f1)}"
+    return f"  {label:<24} {p}  {r}  {f}"
+
+
+def format_report(reports: dict[str, TierReport]) -> str:
+    lines: list[str] = []
+    for tier in sorted(reports):
+        report = reports[tier]
+        lines.append(f"=== {tier} ===")
+        for cat in CATEGORY_COUNTS:
+            lines.append(_fmt_counts(cat, report.per_category[cat]))
+        lines.append(_fmt_counts("OVERALL", report.overall))
+        acc = report.axes.accuracy
+        acc_str = _fmt_metric(acc)
+        lines.append(
+            f"  assertion axes: {acc_str} "
+            f"({report.axes.correct}/{report.axes.total} matched fields)"
+        )
+        if report.contamination_total:
+            lines.append(
+                f"  contamination abstention: "
+                f"{report.contamination_pass}/{report.contamination_total} passed"
+            )
+        lines.append("")
+    return "\n".join(lines)

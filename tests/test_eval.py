@@ -1,9 +1,9 @@
 import json
 
 from vexas.eval import (
-    AxisScore, Counts, EvalDoc, EvalField, EvalUnit, align_list, axis_accuracy,
-    load_eval_file, score_document, score_list, score_scalar_dict, score_unit,
-    values_match,
+    AxisScore, Counts, DocScore, EvalDoc, EvalField, EvalUnit, UnitScore,
+    align_list, axis_accuracy, format_report, load_eval_file, score_corpus,
+    score_document, score_list, score_scalar_dict, score_unit, values_match,
 )
 
 
@@ -286,3 +286,51 @@ def test_non_contamination_document_has_no_abstention_verdict():
     gold_doc = EvalDoc("PMC1", None, "silver", None, False, [_unit()])
     pred_doc = EvalDoc("PMC1", None, "silver", None, False, [_unit()])
     assert score_document(gold_doc, pred_doc).abstained is None
+
+
+def _doc_score(tier, per_cat, axes_correct=0, axes_total=0,
+               contamination=False, abstained=None):
+    unit = UnitScore(per_category=per_cat,
+                     axes=AxisScore(axes_correct, axes_total),
+                     total_pred_fields=0)
+    return DocScore(pmc_id="PMC1", tier=tier, contamination_check=contamination,
+                    units=[unit], abstained=abstained)
+
+
+def test_corpus_groups_by_tier():
+    docs = [
+        _doc_score("silver", {"timeline": Counts(tp=3, fp=1, fn=0)}),
+        _doc_score("gold", {"timeline": Counts(tp=2, fp=0, fn=1)}),
+    ]
+    reports = score_corpus(docs)
+    assert set(reports) == {"silver", "gold"}
+    assert reports["silver"].per_category["timeline"].tp == 3
+    assert reports["gold"].per_category["timeline"].fn == 1
+
+
+def test_corpus_sums_within_tier():
+    docs = [
+        _doc_score("silver", {"labs": Counts(tp=2, fp=0, fn=1)}),
+        _doc_score("silver", {"labs": Counts(tp=1, fp=1, fn=0)}),
+    ]
+    labs = score_corpus(docs)["silver"].per_category["labs"]
+    assert (labs.tp, labs.fp, labs.fn) == (3, 1, 1)
+
+
+def test_corpus_tracks_contamination_passes():
+    docs = [
+        _doc_score("silver", {}, contamination=True, abstained=True),
+        _doc_score("silver", {}, contamination=True, abstained=False),
+    ]
+    report = score_corpus(docs)["silver"]
+    assert report.contamination_pass == 1
+    assert report.contamination_total == 2
+
+
+def test_format_report_shows_counts_with_ratios():
+    docs = [_doc_score("silver", {"timeline": Counts(tp=12, fp=2, fn=3)})]
+    text = format_report(score_corpus(docs))
+    assert "silver" in text
+    assert "timeline" in text
+    assert "12/14" in text   # precision denominator
+    assert "12/15" in text   # recall denominator
