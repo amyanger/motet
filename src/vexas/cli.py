@@ -29,7 +29,7 @@ CATEGORY_CALLS = 5
 #: Output tokens per category call -- extraction is verbose.
 CATEGORY_OUTPUT = 800
 
-#: Verification: `vexas run` verifies every surviving field with a blind
+#: Verification: `motet run` verifies every surviving field with a blind
 #: second pass (verify.py). Roughly 30 fields per report, so this is the
 #: highest-volume stage and dominates the call count. Each call returns a
 #: short {"supported", "reason"} object.
@@ -99,14 +99,14 @@ def check_environment() -> list[str]:
             "  2. Add credits at https://console.anthropic.com/settings/billing\n"
             "  3. cp .env.example .env  and put the key in it\n"
             "  Runs are billed to your own account. Use "
-            "'vexas estimate --limit 25' to price a run first."
+            "'motet estimate --limit 25' to price a run first."
         )
     return problems
 
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="vexas",
+        prog="motet",
         description="Mine rare-disease case reports into traceable patterns.",
     )
     sub = parser.add_subparsers(dest="command", required=True)
@@ -178,7 +178,7 @@ def main(argv: list[str] | None = None) -> int:
                 print(p)
             return 1
         print("Ready. API key found.")
-        print("Try: vexas estimate --limit 25")
+        print("Try: motet estimate --limit 25")
         return 0
 
     if args.command == "estimate":

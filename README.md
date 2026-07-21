@@ -1,4 +1,6 @@
-# Rare Disease Case-Report Miner
+# Motet
+
+*Many scattered case reports, read as one score.*
 
 Mines published case reports for a rare disease and surfaces longitudinal
 patterns (symptom onset order, treatment response by line of therapy, and
@@ -23,12 +25,12 @@ You supply your own Anthropic API key and pay for your own runs.
 3. Configure and install:
 
 ```bash
-git clone https://github.com/amyanger/rare-disease-case-report-miner.git
-cd rare-disease-case-report-miner
+git clone https://github.com/amyanger/motet.git
+cd motet
 python3 -m venv .venv
 .venv/bin/pip install -e .
 cp .env.example .env    # then put your key in .env
-.venv/bin/vexas check
+.venv/bin/motet check
 ```
 
 `NCBI_API_KEY` is optional. Without it NCBI allows 3 requests/second;
@@ -37,11 +39,11 @@ with it, 10. Free from https://www.ncbi.nlm.nih.gov/account/
 ## Usage
 
 ```bash
-vexas check                  # verify setup, spends nothing
-vexas estimate --limit 25    # price a run, needs no API key
-vexas run --limit 25         # extract 25 reports
-vexas serve --limit 25       # extract, then open the web UI
-vexas run                    # full corpus
+motet check                  # verify setup, spends nothing
+motet estimate --limit 25    # price a run, needs no API key
+motet run --limit 25         # extract 25 reports
+motet serve --limit 25       # extract, then open the web UI
+motet run                    # full corpus
 ```
 
 **Always estimate first.** `--limit` is the main cost control: a 25-report
