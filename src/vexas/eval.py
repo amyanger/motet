@@ -87,6 +87,19 @@ class Counts:
         return 2 * p * r / (p + r)
 
 
+@dataclass
+class AxisScore:
+    correct: int = 0
+    total: int = 0
+
+    def __add__(self, other: "AxisScore") -> "AxisScore":
+        return AxisScore(self.correct + other.correct, self.total + other.total)
+
+    @property
+    def accuracy(self) -> float | None:
+        return self.correct / self.total if self.total else None
+
+
 def values_match(gold: EvalField, pred: EvalField, key: str) -> bool:
     """True if two fields state the same value, normalization-aware."""
     if gold.value is None or pred.value is None:
@@ -134,6 +147,24 @@ def align_list(
                 pairs.append((gold_field, pred_field))
                 break
     return pairs
+
+
+def axis_accuracy(pairs: list[tuple[EvalField, EvalField]]) -> AxisScore:
+    """Score assertion-axis accuracy over matched (true-positive) field pairs.
+
+    A pair is axis-correct only if certainty, temporality, and experiencer
+    all match.
+    """
+    score = AxisScore()
+    for gold, pred in pairs:
+        score.total += 1
+        if (
+            gold.certainty == pred.certainty
+            and gold.temporality == pred.temporality
+            and gold.experiencer == pred.experiencer
+        ):
+            score.correct += 1
+    return score
 
 
 def score_list(

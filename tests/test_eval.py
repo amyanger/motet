@@ -1,6 +1,6 @@
 import json
 
-from vexas.eval import Counts, EvalField, align_list, load_eval_file, score_list, score_scalar_dict, values_match
+from vexas.eval import AxisScore, Counts, EvalField, align_list, axis_accuracy, load_eval_file, score_list, score_scalar_dict, values_match
 
 
 def _doc_dict():
@@ -184,3 +184,30 @@ def test_duplicate_gold_values_consume_distinct_predictions():
     counts, _ = score_list(gold, pred, "timeline")
     assert counts.tp == 1
     assert counts.fn == 1
+
+
+def test_axis_all_correct():
+    pairs = [(_f("fever"), _f("fever"))]  # both default positive/present/patient
+    score = axis_accuracy(pairs)
+    assert score.correct == 1
+    assert score.total == 1
+    assert score.accuracy == 1.0
+
+
+def test_axis_certainty_mismatch_is_incorrect():
+    gold = _f("lymphoma", certainty="hypothetical")
+    pred = _f("lymphoma", certainty="positive")
+    score = axis_accuracy([(gold, pred)])
+    assert score.correct == 0
+    assert score.total == 1
+    assert score.accuracy == 0.0
+
+
+def test_axis_experiencer_mismatch_is_incorrect():
+    gold = _f("rash", experiencer="family_member")
+    pred = _f("rash", experiencer="patient")
+    assert axis_accuracy([(gold, pred)]).correct == 0
+
+
+def test_axis_accuracy_none_when_no_pairs():
+    assert axis_accuracy([]).accuracy is None
