@@ -41,6 +41,13 @@ VERIFY_OUTPUT = 40
 SEGMENT_CALLS = 1
 SEGMENT_OUTPUT = 60
 
+#: Relevance gate: one call per report before extraction (relevance.py). Priced
+#: at the extraction rates here as an upper bound -- it actually runs on a
+#: cheaper model, and excluded papers skip extraction entirely, so the real
+#: run costs less than this estimate. Modeled as a single uncached call.
+GATE_CALLS = 1
+GATE_OUTPUT = 60
+
 
 def _eval_dirs() -> tuple[Path, Path]:
     root = settings.data_dir.parent
@@ -101,13 +108,17 @@ def estimate_cost(char_counts: list[int]) -> dict:
         # prefixes differ), so each pays its own cache write.
         total_input += cached_family(tokens, CATEGORY_CALLS)
         total_input += cached_family(tokens, VERIFY_CALLS)
-        # Segmentation is a single uncached call.
+        # Segmentation and the relevance gate are single uncached calls.
         total_input += tokens * SEGMENT_CALLS
-        uncached_input += tokens * (CATEGORY_CALLS + VERIFY_CALLS + SEGMENT_CALLS)
+        total_input += tokens * GATE_CALLS
+        uncached_input += tokens * (
+            CATEGORY_CALLS + VERIFY_CALLS + SEGMENT_CALLS + GATE_CALLS
+        )
 
         total_output += CATEGORY_CALLS * CATEGORY_OUTPUT
         total_output += VERIFY_CALLS * VERIFY_OUTPUT
         total_output += SEGMENT_CALLS * SEGMENT_OUTPUT
+        total_output += GATE_CALLS * GATE_OUTPUT
 
     output_usd = total_output * USD_PER_OUTPUT_TOKEN
     return {
@@ -201,6 +212,24 @@ def _print_estimate(est: dict) -> None:
     print("  Estimate only -- actual usage is reported after the run.")
 
 
+def format_triage_summary(triage) -> str:
+    """One-line counts plus the excluded and uncertain papers with quotes.
+
+    Counts only -- no bare percentages (global constraint). Excluded =
+    mention_only + review; uncertain papers are surfaced for human review.
+    """
+    excluded = triage.mention_only + triage.review
+    lines = [
+        f"triage: {triage.total} full-text papers -- "
+        f"{triage.case_report} case reports, {triage.uncertain} uncertain, "
+        f"{excluded} excluded"
+    ]
+    for entry in triage.excluded + triage.flagged:
+        quote = entry.quote[:80] if entry.quote else "(no quote)"
+        lines.append(f"  {entry.pmc_id} [{entry.label}]: {quote}")
+    return "\n".join(lines)
+
+
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
 
@@ -253,6 +282,8 @@ def main(argv: list[str] | None = None) -> int:
     result = run_pipeline(limit=args.limit)
     print(f"\n{len(result.records)} records from "
           f"{result.full_text_count} of {result.corpus_size} reports")
+    if result.triage:
+        print(format_triage_summary(result.triage))
     if result.gate_stats:
         print(f"gate rejection rate: "
               f"{result.gate_stats.rejection_rate * 100:.1f}%")

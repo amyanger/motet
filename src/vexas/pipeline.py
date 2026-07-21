@@ -140,12 +140,19 @@ def process_article(article, pmc_id, classify=classify_relevance,
     return records, gate_stats, verify_stats, verdict
 
 
-def run(limit: int | None = None, verify: bool = True) -> PipelineResult:
-    """Fetch, extract, gate and (by default) verify the whole corpus."""
+def run(limit: int | None = None, verify: bool = True,
+        gate: bool = True) -> PipelineResult:
+    """Fetch, triage, extract, gate and (by default) verify the whole corpus.
+
+    When `gate` is set (default), each full-text paper is classified before
+    extraction and only VEXAS case reports are extracted; the rest are recorded
+    in result.triage. Set gate=False to extract every paper (pre-gate behavior).
+    """
     pmc_ids = search_pmc_ids()
     result = PipelineResult(corpus_size=len(pmc_ids))
     gate_stats = GateStats()
     verify_stats = VerifyStats()
+    triage = TriageReport()
     cache = _verified_cache if verify else _record_cache
 
     for index, raw_id in enumerate(pmc_ids[:limit] if limit else pmc_ids, 1):
@@ -159,6 +166,12 @@ def run(limit: int | None = None, verify: bool = True) -> PipelineResult:
         if not article.sections:
             continue
         result.full_text_count += 1
+
+        if gate:
+            verdict = classify_cached(article, pmc_id, _relevance_cache)
+            triage.record(pmc_id, verdict)
+            if verdict.label is not RelevanceLabel.CASE_REPORT:
+                continue
 
         cached = cache.get_json(pmc_id)
         if cached is not None:
@@ -179,4 +192,5 @@ def run(limit: int | None = None, verify: bool = True) -> PipelineResult:
 
     result.gate_stats = gate_stats
     result.verify_stats = verify_stats
+    result.triage = triage if gate else None
     return result

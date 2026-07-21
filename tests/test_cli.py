@@ -3,6 +3,9 @@ import json
 import pytest
 
 from vexas.cli import build_parser, check_environment, estimate_cost, run_eval
+from vexas.cli import format_triage_summary
+from vexas.pipeline import TriageReport
+from vexas.relevance import RelevanceLabel, RelevanceVerdict
 
 
 def test_limit_defaults_to_none_meaning_full_corpus():
@@ -126,3 +129,34 @@ def test_run_eval_notes_missing_prediction(tmp_path):
     report = run_eval(gold_dir, pred_dir)
     assert "PMC1" in report
     assert "no prediction" in report.lower()
+
+
+def test_estimate_includes_the_gate_call():
+    # Adding a per-report gate call can only raise the estimate, never lower it.
+    from vexas import cli
+    baseline = (cli.CATEGORY_CALLS, cli.VERIFY_CALLS, cli.SEGMENT_CALLS)
+    est = estimate_cost([40_000])
+    assert est["reports"] == 1
+    # One gate call of ~10k tokens adds measurable input; assert it is priced.
+    assert est["total_usd"] > 0
+    # Output budget now includes the gate's short JSON.
+    assert est["output_tokens"] >= (
+        cli.CATEGORY_CALLS * cli.CATEGORY_OUTPUT
+        + cli.VERIFY_CALLS * cli.VERIFY_OUTPUT
+        + cli.SEGMENT_CALLS * cli.SEGMENT_OUTPUT
+        + cli.GATE_CALLS * cli.GATE_OUTPUT
+    )
+
+
+def test_triage_summary_is_counts_only_no_percentage():
+    report = TriageReport()
+    report.record("PMC1", RelevanceVerdict(RelevanceLabel.CASE_REPORT, "q", "r"))
+    report.record("PMC2", RelevanceVerdict(
+        RelevanceLabel.MENTION_ONLY, "VEXAS was considered", "differential"))
+    report.record("PMC3", RelevanceVerdict(RelevanceLabel.UNCERTAIN, "", "unclear"))
+    text = format_triage_summary(report)
+    assert "%" not in text
+    assert "3" in text  # total
+    assert "PMC2" in text  # excluded paper listed
+    assert "VEXAS was considered" in text  # with its quote
+    assert "PMC3" in text  # uncertain paper surfaced
