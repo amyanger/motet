@@ -24,11 +24,21 @@ CACHE_WRITE_MULTIPLIER = 1.25
 #: pre-flight estimate; the real number comes from usage after a run.
 CHARS_PER_TOKEN = 4
 
-#: Calls per report: 5 category prompts. Verification (verify.py) is a
-#: deferred stage that `vexas run` does not invoke, so it is not priced here.
+#: Extraction: 5 category prompts per report.
 CATEGORY_CALLS = 5
-#: Output tokens per call -- extraction is verbose.
+#: Output tokens per category call -- extraction is verbose.
 CATEGORY_OUTPUT = 800
+
+#: Verification: `vexas run` verifies every surviving field with a blind
+#: second pass (verify.py). Roughly 30 fields per report, so this is the
+#: highest-volume stage and dominates the call count. Each call returns a
+#: short {"supported", "reason"} object.
+VERIFY_CALLS = 30
+VERIFY_OUTPUT = 40
+
+#: Segmentation: one call per report to detect patient count / anchors.
+SEGMENT_CALLS = 1
+SEGMENT_OUTPUT = 60
 
 
 def estimate_cost(char_counts: list[int]) -> dict:
@@ -46,19 +56,26 @@ def estimate_cost(char_counts: list[int]) -> dict:
     uncached_input = 0.0
     total_output = 0
 
+    def cached_family(tokens: float, calls: int) -> float:
+        # Each cache family (extraction, verification) re-sends the same
+        # source: one write, the rest read back at 0.1x.
+        reads = calls - 1
+        return tokens * (CACHE_WRITE_MULTIPLIER + reads * CACHE_READ_MULTIPLIER)
+
     for chars in char_counts:
         tokens = chars / CHARS_PER_TOKEN
-        calls = CATEGORY_CALLS
 
-        # One cache family (the extraction prefix): one write, the rest reads.
-        writes = 1
-        reads = calls - writes
-        total_input += tokens * (
-            writes * CACHE_WRITE_MULTIPLIER + reads * CACHE_READ_MULTIPLIER
-        )
-        uncached_input += tokens * calls
+        # Extraction and verification are two separate cache families (their
+        # prefixes differ), so each pays its own cache write.
+        total_input += cached_family(tokens, CATEGORY_CALLS)
+        total_input += cached_family(tokens, VERIFY_CALLS)
+        # Segmentation is a single uncached call.
+        total_input += tokens * SEGMENT_CALLS
+        uncached_input += tokens * (CATEGORY_CALLS + VERIFY_CALLS + SEGMENT_CALLS)
 
         total_output += CATEGORY_CALLS * CATEGORY_OUTPUT
+        total_output += VERIFY_CALLS * VERIFY_OUTPUT
+        total_output += SEGMENT_CALLS * SEGMENT_OUTPUT
 
     output_usd = total_output * USD_PER_OUTPUT_TOKEN
     return {
@@ -197,6 +214,9 @@ def main(argv: list[str] | None = None) -> int:
     if result.gate_stats:
         print(f"gate rejection rate: "
               f"{result.gate_stats.rejection_rate * 100:.1f}%")
+    if result.verify_stats:
+        print(f"verify rejection rate: "
+              f"{result.verify_stats.rejection_rate * 100:.1f}%")
     print(f"cache: {CACHE_STATS['read']:,} read, "
           f"{CACHE_STATS['write']:,} written, "
           f"{CACHE_STATS['uncached']:,} uncached")

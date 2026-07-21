@@ -43,6 +43,13 @@ def test_estimate_of_empty_corpus_is_zero():
     assert result["reports"] == 0
 
 
+def test_estimate_includes_the_verification_pass():
+    """`vexas run` now verifies every field, so the estimate must price
+    the verify calls -- output tokens exceed the five category calls alone."""
+    est = estimate_cost([30_000])
+    assert est["output_tokens"] > 5 * 800
+
+
 def test_check_environment_reports_missing_api_key(monkeypatch):
     from dataclasses import replace
     from vexas.cli import settings
