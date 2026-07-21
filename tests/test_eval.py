@@ -1,5 +1,4 @@
 import json
-from pathlib import Path
 
 from vexas.eval import EvalField, load_eval_file
 

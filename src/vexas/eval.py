@@ -87,7 +87,9 @@ def _unit(raw: dict) -> EvalUnit:
         patient_id=raw["patient_id"],
         text=raw.get("text", ""),
         demographics={
-            k: _field(v) for k, v in raw.get("demographics", {}).items()
+            k: f
+            for k, v in raw.get("demographics", {}).items()
+            if (f := _field(v)) is not None
         },
         timeline=_list(raw.get("timeline", []), "timeline"),
         labs=_list(raw.get("labs", []), "labs"),
