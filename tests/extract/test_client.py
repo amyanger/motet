@@ -1,6 +1,8 @@
 import pytest
 
+from vexas.extract import client
 from vexas.extract.client import extract_json_block
+from vexas.config import settings
 
 
 def test_parses_bare_json():
@@ -25,3 +27,42 @@ def test_raises_on_unparseable_output():
 def test_handles_nested_braces():
     raw = '{"outer": {"inner": [1, 2]}}'
     assert extract_json_block(raw) == {"outer": {"inner": [1, 2]}}
+
+
+def test_complete_json_defaults_to_settings_model(monkeypatch):
+    captured = {}
+
+    class FakeMessages:
+        def create(self, **kwargs):
+            captured.update(kwargs)
+            class Msg:
+                content = [type("B", (), {"text": '{"ok": true}'})()]
+                usage = type("U", (), {"input_tokens": 1})()
+            return Msg()
+
+    class FakeClient:
+        messages = FakeMessages()
+
+    monkeypatch.setattr(client, "_client", FakeClient())
+    result = client.complete_json([{"type": "text", "text": "hi"}])
+    assert result == {"ok": True}
+    assert captured["model"] == settings.model
+
+
+def test_complete_json_uses_explicit_model(monkeypatch):
+    captured = {}
+
+    class FakeMessages:
+        def create(self, **kwargs):
+            captured.update(kwargs)
+            class Msg:
+                content = [type("B", (), {"text": '{"ok": true}'})()]
+                usage = type("U", (), {"input_tokens": 1})()
+            return Msg()
+
+    class FakeClient:
+        messages = FakeMessages()
+
+    monkeypatch.setattr(client, "_client", FakeClient())
+    client.complete_json([{"type": "text", "text": "hi"}], model="claude-haiku-4-5-20251001")
+    assert captured["model"] == "claude-haiku-4-5-20251001"

@@ -63,12 +63,14 @@ def extract_json_block(raw: str) -> dict:
 
 
 def complete_json(prompt: str | list[dict], max_tokens: int = 4096,
-                  max_retries: int = 3) -> dict:
+                  max_retries: int = 3, model: str | None = None) -> dict:
     """Send one prompt, return the parsed JSON object.
 
     `prompt` is either a plain string or a list of content blocks. The block
     form carries the `cache_control` breakpoint that makes repeated calls
     about the same report cost 0.1x -- see extract/prompts.build_prompt.
+    `model` overrides settings.model (the relevance gate runs on a cheaper
+    model than extraction).
     """
     client = _get_client()
     content = prompt if isinstance(prompt, list) else [
@@ -79,7 +81,7 @@ def complete_json(prompt: str | list[dict], max_tokens: int = 4096,
     for attempt in range(max_retries):
         try:
             message = client.messages.create(
-                model=settings.model,
+                model=model or settings.model,
                 max_tokens=max_tokens,
                 messages=[{"role": "user", "content": content}],
             )
