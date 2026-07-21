@@ -14,7 +14,6 @@ from collections import defaultdict
 from itertools import combinations
 
 from vexas.aggregate.denominators import Count, Pattern
-from vexas.normalize.ontology import search_hpo
 from vexas.schema import Certainty, PatientRecord
 
 #: Only findings the report affirms belong in a sequence. Negated,
@@ -25,19 +24,20 @@ _ADMISSIBLE = {Certainty.POSITIVE}
 def canonical_symptom(value: str) -> str:
     """Canonical key for a symptom surface phrase.
 
-    Uses the HPO top-hit label (via search_hpo, DiskCache-backed, free) so
-    surface variants collapse; falls back to a whitespace/case-normalized
-    surface form when there is no match or the lookup is unavailable. The
-    model never emits the identifier -- retrieval proposes, code validates.
+    Surface-form normalization (case, whitespace) so trivial variants of the
+    same phrase merge into one precedence key.
+
+    Ontology-based canonicalization via HPO is DEFERRED, not naively applied.
+    Running the pipeline showed that OLS4's default search ranking degrades
+    common clinical terms -- a "fever" query returns "Intrapartum fever",
+    "ocular inflammation" returns "Inflammatory abnormality of the eye" --
+    so auto-adopting the top hit would corrupt the labels rather than merge
+    synonyms. Proper canonicalization needs the retrieve-validate-RERANK step
+    the plan describes (normalize/ontology.py provides the retrieval half);
+    until that re-ranking exists, keeping the grounded surface phrase is more
+    faithful than substituting a mis-ranked ontology sibling.
     """
-    normalized = " ".join((value or "").strip().lower().split())
-    if not normalized:
-        return normalized
-    try:
-        hits = search_hpo(normalized, limit=1)
-    except Exception:
-        return normalized
-    return hits[0].label.strip().lower() if hits else normalized
+    return " ".join((value or "").strip().lower().split())
 
 
 def _ordered_events(record: PatientRecord):

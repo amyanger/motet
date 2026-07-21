@@ -121,24 +121,11 @@ def test_conflicting_orders_share_the_pair_denominator():
     assert fc.count.denominator == 4   # all 4 placed both symptoms
 
 
-def test_symptom_surface_variants_merge_via_canonicalization(monkeypatch):
-    from vexas.aggregate import sequence as seq
-    from vexas.normalize.ontology import OntologyTerm
-
-    def fake_search_hpo(phrase, limit=1):
-        # "fever" and "fevers" both map to the same HPO label.
-        if "fever" in phrase:
-            return [OntologyTerm(term_id="HP:0001945", label="Fever",
-                                 ontology="hp")]
-        if "chondritis" in phrase:
-            return [OntologyTerm(term_id="HP:0002145", label="Chondritis",
-                                 ontology="hp")]
-        return []
-
-    monkeypatch.setattr(seq, "search_hpo", fake_search_hpo)
-    records = [_record("1", [_event("fever", 1), _event("chondritis", 2)]),
-               _record("2", [_event("fevers", 1), _event("chondritis", 2)]),
-               _record("3", [_event("recurrent fever", 1),
+def test_symptom_surface_variants_merge_via_canonicalization():
+    """Case and whitespace variants of one phrase collapse to a single key."""
+    records = [_record("1", [_event("Fever", 1), _event("chondritis", 2)]),
+               _record("2", [_event("fever", 1), _event("chondritis", 2)]),
+               _record("3", [_event("  FEVER ", 1),
                              _event("chondritis", 2)])]
     patterns = rank_precedence(records, min_support=3)   # default canonicalize
     assert len(patterns) == 1
