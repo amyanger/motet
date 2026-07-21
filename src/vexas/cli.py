@@ -11,6 +11,7 @@ their own runs. Two design consequences:
 
 import argparse
 import sys
+from pathlib import Path
 
 from vexas.config import settings
 
@@ -39,6 +40,37 @@ VERIFY_OUTPUT = 40
 #: Segmentation: one call per report to detect patient count / anchors.
 SEGMENT_CALLS = 1
 SEGMENT_OUTPUT = 60
+
+
+def _eval_dirs() -> tuple[Path, Path]:
+    root = settings.data_dir.parent
+    return root / "eval" / "gold", root / "eval" / "pred"
+
+
+def run_eval(gold_dir: Path, pred_dir: Path) -> str:
+    """Score every gold/pred pair and return the report text. Offline."""
+    from vexas.eval import (
+        format_report,
+        load_eval_file,
+        score_corpus,
+        score_document,
+    )
+
+    doc_scores = []
+    skipped = []
+    for gold_path in sorted(Path(gold_dir).glob("*.json")):
+        pred_path = Path(pred_dir) / gold_path.name
+        if not pred_path.exists():
+            skipped.append(gold_path.stem)
+            continue
+        gold = load_eval_file(gold_path)
+        pred = load_eval_file(pred_path)
+        doc_scores.append(score_document(gold, pred))
+
+    report = format_report(score_corpus(doc_scores))
+    if skipped:
+        report += "\nno prediction yet: " + ", ".join(skipped)
+    return report
 
 
 def estimate_cost(char_counts: list[int]) -> dict:
@@ -138,6 +170,8 @@ def build_parser() -> argparse.ArgumentParser:
     serve.add_argument("--min-support", type=int, default=3)
 
     sub.add_parser("check", help="Verify setup without spending anything.")
+
+    sub.add_parser("eval", help="Score extraction against gold keys. Offline.")
     return parser
 
 
@@ -179,6 +213,14 @@ def main(argv: list[str] | None = None) -> int:
             return 1
         print("Ready. API key found.")
         print("Try: motet estimate --limit 25")
+        return 0
+
+    if args.command == "eval":
+        gold_dir, pred_dir = _eval_dirs()
+        if not gold_dir.exists():
+            print(f"No eval directory at {gold_dir}")
+            return 1
+        print(run_eval(gold_dir, pred_dir))
         return 0
 
     if args.command == "estimate":

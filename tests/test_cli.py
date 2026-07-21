@@ -1,6 +1,9 @@
+import json
+from pathlib import Path
+
 import pytest
 
-from vexas.cli import build_parser, check_environment, estimate_cost
+from vexas.cli import build_parser, check_environment, estimate_cost, run_eval
 
 
 def test_limit_defaults_to_none_meaning_full_corpus():
@@ -85,3 +88,42 @@ def test_estimate_does_not_require_an_api_key(monkeypatch):
     monkeypatch.setattr("vexas.cli.settings",
                         replace(settings, anthropic_api_key=None))
     assert estimate_cost([30_000])["total_usd"] > 0
+
+
+def _write(path, contamination=False, **units_kw):
+    doc = {
+        "pmc_id": path.stem, "pmid": None, "tier": "silver",
+        "verified_by": None, "contamination_check": contamination,
+        "units": [{
+            "patient_id": f"{path.stem}-p1", "text": "A 68-year-old man.",
+            "demographics": {"age": {"value": "68", "quote": "68-year-old"}},
+            "timeline": [], "labs": [], "treatments": [],
+            "prior_diagnoses": [], "outcome": None,
+            "reason_for_publication": None,
+            **units_kw,
+        }],
+    }
+    path.write_text(json.dumps(doc), encoding="utf-8")
+
+
+def test_run_eval_scores_a_matched_pair(tmp_path):
+    gold_dir = tmp_path / "gold"
+    pred_dir = tmp_path / "pred"
+    gold_dir.mkdir()
+    pred_dir.mkdir()
+    _write(gold_dir / "PMC1.json")
+    _write(pred_dir / "PMC1.json")
+    report = run_eval(gold_dir, pred_dir)
+    assert "silver" in report
+    assert "demographics" in report
+
+
+def test_run_eval_notes_missing_prediction(tmp_path):
+    gold_dir = tmp_path / "gold"
+    pred_dir = tmp_path / "pred"
+    gold_dir.mkdir()
+    pred_dir.mkdir()
+    _write(gold_dir / "PMC1.json")   # no matching pred
+    report = run_eval(gold_dir, pred_dir)
+    assert "PMC1" in report
+    assert "no prediction" in report.lower()
