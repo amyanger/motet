@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}{{ pattern.title }}{% endblock %}
+{% block content %}
+<p><a href="/">&larr; all patterns</a></p>
+<h1>{{ pattern.title }}</h1>
+<p class="count">{{ pattern.count.as_text() }}</p>
+
+<div class="caveat">{{ caveat }}</div>
+
+<h2>Supporting reports</h2>
+<div class="wrap">
+<table>
+  <thead>
+    <tr><th>PMID</th><th>Evidence</th></tr>
+  </thead>
+  <tbody>
+  {% for pmid, record in supporting %}
+    <tr>
+      <td>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/{{ pmid }}/"
+           target="_blank" rel="noopener">{{ pmid }}</a>
+      </td>
+      <td>
+        {% if record %}
+          {% for event in record.timeline %}
+            <div class="quote">&ldquo;{{ event.symptom.quote }}&rdquo;</div>
+          {% endfor %}
+          {% for course in record.treatments %}
+            <div class="quote">&ldquo;{{ course.treatment.quote }}&rdquo;</div>
+          {% endfor %}
+        {% else %}
+          <em>record not loaded</em>
+        {% endif %}
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

@@ -31,7 +31,7 @@ from vexas.schema import PatientRecord, TreatmentCourse
 STEROID_REDUCTION_THRESHOLD = 0.5
 
 RESPONSE_DEFINITION = (
-    "Symptoms resolved, steroid dose reduced by at least 50%, and a "
+    "Symptoms resolved, steroid dose reduced by at least half, and a "
     "follow-up duration stated. Applied uniformly; authors' own response "
     "labels are not used."
 )

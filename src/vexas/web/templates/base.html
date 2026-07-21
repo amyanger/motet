@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}VEXAS case-report miner{% endblock %}</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, sans-serif;
+      max-width: 60rem; margin: 0 auto; padding: 2rem 1.5rem;
+    }
+    h1 { font-size: 1.6rem; margin-bottom: .25rem; }
+    .sub { opacity: .7; margin-top: 0; }
+    .caveat {
+      border-left: 3px solid currentColor; padding: .75rem 1rem;
+      margin: 1.5rem 0; opacity: .8; font-size: .9rem;
+    }
+    .pattern {
+      border: 1px solid color-mix(in srgb, currentColor 20%, transparent);
+      border-radius: .5rem; padding: 1rem; margin: .75rem 0;
+    }
+    .pattern a { text-decoration: none; font-weight: 600; }
+    .count { font-variant-numeric: tabular-nums; opacity: .75; }
+    .quote {
+      border-left: 2px solid color-mix(in srgb, currentColor 30%, transparent);
+      padding-left: .75rem; margin: .5rem 0; font-style: italic; opacity: .85;
+    }
+    table { border-collapse: collapse; width: 100%; }
+    td, th { text-align: left; padding: .4rem .6rem;
+             border-bottom: 1px solid color-mix(in srgb, currentColor 15%, transparent); }
+    .wrap { overflow-x: auto; }
+  </style>
+</head>
+<body>
+{% block content %}{% endblock %}
+</body>
+</html>

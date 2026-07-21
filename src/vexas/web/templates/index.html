@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>VEXAS syndrome case-report miner</h1>
+<p class="sub">Longitudinal patterns extracted from published case reports.
+Every claim is traceable to a verbatim source quote.</p>
+
+<div class="caveat">{{ caveat }}</div>
+
+<h2>Onset sequence</h2>
+{% for pattern in patterns.get('sequence', []) %}
+  <div class="pattern">
+    <a href="/pattern/sequence/{{ loop.index0 }}">{{ pattern.title }}</a>
+    <div class="count">{{ pattern.count.as_text() }}</div>
+  </div>
+{% else %}
+  <p>No sequence pattern met the support threshold.</p>
+{% endfor %}
+
+<h2>Treatment response by line of therapy</h2>
+<div class="caveat">Response definition applied uniformly:
+{{ response_definition }}</div>
+{% for pattern in patterns.get('treatment', []) %}
+  <div class="pattern">
+    <a href="/pattern/treatment/{{ loop.index0 }}">{{ pattern.title }}</a>
+    <div class="count">{{ pattern.count.as_text() }}</div>
+  </div>
+{% else %}
+  <p>No treatment pattern met the support threshold.</p>
+{% endfor %}
+
+<h2>Diagnostic odyssey</h2>
+{% for pattern in patterns.get('odyssey', []) %}
+  <div class="pattern">
+    <a href="/pattern/odyssey/{{ loop.index0 }}">{{ pattern.title }}</a>
+    <div class="count">{{ pattern.count.as_text() }}</div>
+  </div>
+{% else %}
+  <p>No misdiagnosis pattern met the support threshold.</p>
+{% endfor %}
+{% endblock %}
