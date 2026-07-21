@@ -3,7 +3,6 @@ from vexas.extract.runner import GateStats
 from vexas.fetch.pmc import Article
 from vexas.pipeline import (
     PipelineResult,
-    TriageEntry,
     TriageReport,
     classify_cached,
     process_article,

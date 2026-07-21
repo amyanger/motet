@@ -134,7 +134,6 @@ def test_run_eval_notes_missing_prediction(tmp_path):
 def test_estimate_includes_the_gate_call():
     # Adding a per-report gate call can only raise the estimate, never lower it.
     from vexas import cli
-    baseline = (cli.CATEGORY_CALLS, cli.VERIFY_CALLS, cli.SEGMENT_CALLS)
     est = estimate_cost([40_000])
     assert est["reports"] == 1
     # One gate call of ~10k tokens adds measurable input; assert it is priced.
