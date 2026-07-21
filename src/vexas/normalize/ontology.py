@@ -93,8 +93,8 @@ def search_hpo(phrase: str, limit: int = 5) -> list[OntologyTerm]:
 
 def lookup_rxnorm(drug: str) -> OntologyTerm | None:
     """Resolve a drug name to an RxCUI. Cached."""
-    cached = _rxnorm_cache.get_json(drug)
-    if cached is not None:
+    if _rxnorm_cache.has(drug):
+        cached = _rxnorm_cache.get_json(drug)
         return OntologyTerm(**cached) if cached else None
 
     response = httpx.get(RXNORM_LOOKUP, params={"name": drug}, timeout=30)

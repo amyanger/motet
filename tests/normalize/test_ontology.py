@@ -1,8 +1,11 @@
 import pytest
 
+import vexas.normalize.ontology as ontology
+from vexas.cache import DiskCache
 from vexas.normalize.ontology import (
     OntologyTerm,
     is_wellformed_hpo_id,
+    lookup_rxnorm,
     parse_ols_response,
     parse_rxnorm_response,
 )
@@ -55,3 +58,41 @@ def test_parses_rxnorm_response():
 
 def test_rxnorm_miss_returns_none():
     assert parse_rxnorm_response({"idGroup": {}}, "unobtainium") is None
+
+
+def test_lookup_rxnorm_caches_a_miss_and_skips_second_network_call(
+    monkeypatch, tmp_path
+):
+    """A cached RxNorm miss must not fall through to a live call again.
+
+    Regression test: put_json(drug, None) writes JSON `null`, and
+    get_json returns None both for "never cached" and "cached null" --
+    so the old `if cached is not None` guard could never detect a
+    cached miss and would re-hit the network every time.
+    """
+    monkeypatch.setattr(
+        ontology, "_rxnorm_cache",
+        DiskCache("ontology_rxnorm_test", root=tmp_path),
+    )
+
+    calls = {"count": 0}
+
+    class FakeResponse:
+        def raise_for_status(self):
+            pass
+
+        def json(self):
+            return {"idGroup": {}}
+
+    def fake_get(*args, **kwargs):
+        calls["count"] += 1
+        return FakeResponse()
+
+    monkeypatch.setattr(ontology.httpx, "get", fake_get)
+
+    first = lookup_rxnorm("unobtainium")
+    second = lookup_rxnorm("unobtainium")
+
+    assert first is None
+    assert second is None
+    assert calls["count"] == 1
