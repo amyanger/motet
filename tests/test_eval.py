@@ -1,6 +1,6 @@
 import json
 
-from vexas.eval import Counts, EvalField, load_eval_file, score_scalar_dict, values_match
+from vexas.eval import Counts, EvalField, align_list, load_eval_file, score_list, score_scalar_dict, values_match
 
 
 def _doc_dict():
@@ -139,3 +139,48 @@ def test_value_null_fields_dropped_on_load(tmp_path):
     assert "age" in loaded_unit.demographics
     # Value-null outcome should become None
     assert loaded_unit.outcome is None
+
+
+def test_list_matches_regardless_of_order():
+    gold = [_f("fever"), _f("chondritis"), _f("anemia")]
+    pred = [_f("anemia"), _f("fever"), _f("chondritis")]
+    counts, pairs = score_list(gold, pred, "timeline")
+    assert counts.tp == 3
+    assert counts.fp == 0
+    assert counts.fn == 0
+    assert len(pairs) == 3
+
+
+def test_list_extra_prediction_is_false_positive():
+    gold = [_f("fever")]
+    pred = [_f("fever"), _f("rash")]
+    counts, _ = score_list(gold, pred, "timeline")
+    assert counts.tp == 1
+    assert counts.fp == 1
+    assert counts.fn == 0
+
+
+def test_list_missed_gold_is_false_negative():
+    gold = [_f("fever"), _f("chondritis")]
+    pred = [_f("fever")]
+    counts, _ = score_list(gold, pred, "timeline")
+    assert counts.tp == 1
+    assert counts.fp == 0
+    assert counts.fn == 1
+
+
+def test_align_pairs_gold_with_matching_pred():
+    gold = [_f("ruxolitinib")]
+    pred = [_f("Ruxolitinib")]
+    pairs = align_list(gold, pred, "treatments")
+    assert len(pairs) == 1
+    assert pairs[0][0].value == "ruxolitinib"
+    assert pairs[0][1].value == "Ruxolitinib"
+
+
+def test_duplicate_gold_values_consume_distinct_predictions():
+    gold = [_f("fever"), _f("fever")]
+    pred = [_f("fever")]
+    counts, _ = score_list(gold, pred, "timeline")
+    assert counts.tp == 1
+    assert counts.fn == 1

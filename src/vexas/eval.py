@@ -119,6 +119,35 @@ def score_scalar_dict(
     return counts
 
 
+def align_list(
+    gold: list[EvalField], pred: list[EvalField], key: str
+) -> list[tuple[EvalField, EvalField]]:
+    """Greedily pair gold items with matching predictions, one-to-one."""
+    used: set[int] = set()
+    pairs: list[tuple[EvalField, EvalField]] = []
+    for gold_field in gold:
+        for i, pred_field in enumerate(pred):
+            if i in used:
+                continue
+            if values_match(gold_field, pred_field, key):
+                used.add(i)
+                pairs.append((gold_field, pred_field))
+                break
+    return pairs
+
+
+def score_list(
+    gold: list[EvalField], pred: list[EvalField], key: str
+) -> tuple[Counts, list[tuple[EvalField, EvalField]]]:
+    pairs = align_list(gold, pred, key)
+    counts = Counts(
+        tp=len(pairs),
+        fp=len(pred) - len(pairs),
+        fn=len(gold) - len(pairs),
+    )
+    return counts, pairs
+
+
 def _field(raw: dict | None) -> EvalField | None:
     if raw is None:
         return None
