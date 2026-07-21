@@ -2550,7 +2550,7 @@ _FACTORS: dict[tuple[str, str], float] = {
     ("mcv", "fl"): 1.0,
 }
 
-_NUMBER = re.compile(r"-?\d+(?:\.\d+)?")
+_NUMBER = re.compile(r"(?<!\d)-?\d+(?:\.\d+)?")
 
 
 def parse_numeric(text: str) -> float | None:
@@ -3101,8 +3101,14 @@ carefully the extraction was done.
 
 `Count` deliberately has no `.percentage` property. Anything trivial to
 emit eventually gets emitted.
+
+`assert_no_overclaim` is a tripwire, not a proof of completeness: it can
+only catch phrasing we thought to list, so it will miss novel overclaims
+worded differently. The real guarantee is structural -- `Count` always
+carries its denominator and has no percentage property.
 """
 
+import re
 from dataclasses import dataclass, field
 
 STANDING_CAVEAT = (
@@ -3111,16 +3117,31 @@ STANDING_CAVEAT = (
     "features and preferentially publish unusual ones."
 )
 
-FORBIDDEN_PHRASES: frozenset[str] = frozenset({
-    "% of patients",
+# Single-word terms are matched on word boundaries so they don't fire
+# inside a larger innocent word (e.g. "incidence" inside "coincidence",
+# "cures" inside "obscures"). Multi-word phrases are matched as substrings.
+FORBIDDEN_WORDS: frozenset[str] = frozenset({
     "prevalence",
     "incidence",
-    "more effective than",
-    "less effective than",
     "causes",
     "efficacy",
     "cures",
+    "rate",
+})
+
+FORBIDDEN_PHRASES: frozenset[str] = frozenset({
+    "% of patients",
+    "more effective than",
+    "less effective than",
     "leads to remission",
+    "superior to",
+    "inferior to",
+    "outperformed",
+    "worked better than",
+    "resulted in",
+    "due to",
+    "responsible for",
+    "triggered by",
 })
 
 
@@ -3130,14 +3151,17 @@ class OverclaimError(ValueError):
 
 def assert_no_overclaim(text: str) -> None:
     lowered = text.lower()
+    for word in FORBIDDEN_WORDS:
+        if re.search(rf"\b{re.escape(word)}\b", lowered):
+            raise OverclaimError(
+                f"output contains forbidden word {word!r}: {text!r}"
+            )
     for phrase in FORBIDDEN_PHRASES:
         if phrase in lowered:
             raise OverclaimError(
                 f"output contains forbidden phrase {phrase!r}: {text!r}"
             )
     # Bare percentages are banned outright; counts carry denominators.
-    import re
-
     if re.search(r"\d+\s*%", text):
         raise OverclaimError(f"output contains a bare percentage: {text!r}")
 
@@ -3625,7 +3649,7 @@ from vexas.schema import PatientRecord, TreatmentCourse
 STEROID_REDUCTION_THRESHOLD = 0.5
 
 RESPONSE_DEFINITION = (
-    "Symptoms resolved, steroid dose reduced by at least 50%, and a "
+    "Symptoms resolved, steroid dose reduced by at least half, and a "
     "follow-up duration stated. Applied uniformly; authors' own response "
     "labels are not used."
 )
@@ -4397,7 +4421,10 @@ def test_index_never_shows_a_bare_percentage(client):
     the data layer."""
     import re
     body = client.get("/").get_data(as_text=True)
-    assert not re.search(r"\d+\s*%", body)
+    # Strip the <style> block first: CSS percentages (color-mix, width:100%)
+    # are not claims. This guard is about claim text in the rendered page.
+    content = re.sub(r"<style.*?</style>", "", body, flags=re.DOTALL)
+    assert not re.search(r"\d+\s*%", content)
 
 
 def test_index_shows_the_standing_caveat(client):
