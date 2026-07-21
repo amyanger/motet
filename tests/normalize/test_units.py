@@ -1,5 +1,3 @@
-import pytest
-
 from vexas.normalize.units import convert, parse_numeric
 
 

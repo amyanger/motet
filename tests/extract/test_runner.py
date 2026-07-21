@@ -1,3 +1,4 @@
+from vexas.aggregate.odyssey import diagnostic_delays
 from vexas.extract.runner import GateStats, apply_gate, extract_unit
 from vexas.segment import PatientUnit
 
@@ -88,3 +89,32 @@ def test_extract_unit_builds_a_record_from_stubbed_responses():
     assert record.demographics["age"].value == "68"
     assert record.timeline[0].sequence_index == 1
     assert stats.rejected == 0
+
+
+def test_extract_unit_wires_time_to_diagnosis_into_demographics():
+    """The timeline prompt emits a top-level time_to_diagnosis field, but
+    extract_unit used to drop it, so odyssey.diagnostic_delays always saw
+    an empty demographics entry. This exercises the full seam."""
+    source = (
+        "A 71-year-old woman had recurrent fevers. Diagnosis of VEXAS was "
+        "confirmed 2 years after symptom onset."
+    )
+    unit = PatientUnit(patient_id="40000001-p1", pmid="40000001", text=source)
+
+    def fake_complete(prompt, max_tokens=4096):
+        flat = "\n".join(b["text"] for b in prompt)
+        if "onset sequence" in flat:
+            return {
+                "time_to_diagnosis": {
+                    "value": "2",
+                    "unit_as_written": "years",
+                    "quote": "confirmed 2 years after symptom onset",
+                }
+            }
+        return {}
+
+    record, stats = extract_unit(unit, complete=fake_complete)
+    assert record.demographics["time_to_diagnosis"].value == "2"
+
+    delays = diagnostic_delays([record])
+    assert delays == [("40000001", 2.0)]

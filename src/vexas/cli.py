@@ -24,12 +24,11 @@ CACHE_WRITE_MULTIPLIER = 1.25
 #: pre-flight estimate; the real number comes from usage after a run.
 CHARS_PER_TOKEN = 4
 
-#: Calls per report: 5 category prompts + ~30 verification calls.
+#: Calls per report: 5 category prompts. Verification (verify.py) is a
+#: deferred stage that `vexas run` does not invoke, so it is not priced here.
 CATEGORY_CALLS = 5
-VERIFY_CALLS = 30
-#: Output tokens per call -- extraction is verbose, verification is a verdict.
+#: Output tokens per call -- extraction is verbose.
 CATEGORY_OUTPUT = 800
-VERIFY_OUTPUT = 50
 
 
 def estimate_cost(char_counts: list[int]) -> dict:
@@ -49,20 +48,17 @@ def estimate_cost(char_counts: list[int]) -> dict:
 
     for chars in char_counts:
         tokens = chars / CHARS_PER_TOKEN
-        calls = CATEGORY_CALLS + VERIFY_CALLS
+        calls = CATEGORY_CALLS
 
-        # Two cache families (extraction prefix, verification prefix):
-        # one write each, everything else reads.
-        writes = 2
+        # One cache family (the extraction prefix): one write, the rest reads.
+        writes = 1
         reads = calls - writes
         total_input += tokens * (
             writes * CACHE_WRITE_MULTIPLIER + reads * CACHE_READ_MULTIPLIER
         )
         uncached_input += tokens * calls
 
-        total_output += (
-            CATEGORY_CALLS * CATEGORY_OUTPUT + VERIFY_CALLS * VERIFY_OUTPUT
-        )
+        total_output += CATEGORY_CALLS * CATEGORY_OUTPUT
 
     output_usd = total_output * USD_PER_OUTPUT_TOKEN
     return {
@@ -216,6 +212,19 @@ def main(argv: list[str] | None = None) -> int:
     }
     for kind, found in patterns.items():
         print(f"{kind}: {len(found)} patterns")
+
+    from vexas.validate import KNOWN_FINDINGS, check_genotype_gradient
+    genotypes = check_genotype_gradient(result.records)
+    if genotypes:
+        print("\ngenotype gradient "
+              "(validation against published NIH-cohort findings):")
+        for variant, count in sorted(genotypes.items(),
+                                     key=lambda kv: kv[1].n, reverse=True):
+            prior = KNOWN_FINDINGS.get(variant)
+            line = f"  {variant}: {count.as_text()}"
+            if prior:
+                line += f"  [{prior}]"
+            print(line)
 
     if args.command == "serve":
         from vexas.web.app import create_app

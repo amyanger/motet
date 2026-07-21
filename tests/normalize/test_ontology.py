@@ -1,5 +1,3 @@
-import pytest
-
 import vexas.normalize.ontology as ontology
 from vexas.cache import DiskCache
 from vexas.normalize.ontology import (

@@ -32,9 +32,6 @@ def create_app(patterns: dict, records: list) -> Flask:
             pattern = patterns[kind][index]
         except IndexError:
             abort(404)
-        supporting = [
-            records_by_pmid.get(pmid) for pmid in pattern.count.supporting_pmids
-        ]
         return render_template(
             "pattern.html",
             pattern=pattern,

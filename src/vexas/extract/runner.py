@@ -139,6 +139,10 @@ def extract_unit(unit: PatientUnit, complete=complete_json):
         if parsed is not None:
             record.prior_diagnoses.append(parsed)
 
+    ttd = _to_field(payloads.get("timeline", {}).get("time_to_diagnosis"))
+    if ttd is not None:
+        record.demographics["time_to_diagnosis"] = ttd
+
     for raw in payloads.get("labs", {}).get("labs", []):
         analyte = _to_field(raw.get("analyte"))
         if analyte is None:
