@@ -122,6 +122,8 @@ def score_scalar_dict(
 def _field(raw: dict | None) -> EvalField | None:
     if raw is None:
         return None
+    if raw.get("value") is None:
+        return None
     return EvalField(
         value=raw.get("value"),
         quote=raw.get("quote", ""),

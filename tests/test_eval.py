@@ -118,3 +118,24 @@ def test_scalar_dict_counts_tp_fp_fn():
     assert counts.tp == 1
     assert counts.fp == 2   # sex-wrong, vaf-extra
     assert counts.fn == 2   # sex-wrong, country-missing
+
+
+def test_value_null_fields_dropped_on_load(tmp_path):
+    """Value-null fields (abstention) are dropped so not scored as FP/FN."""
+    doc_dict = _doc_dict()
+    unit = doc_dict["units"][0]
+    # Add a demographics field with value: None
+    unit["demographics"]["vaf"] = {"value": None, "quote": "not reported"}
+    # Add an outcome with value: None
+    unit["outcome"] = {"value": None, "quote": "not stated in case report"}
+
+    path = tmp_path / "d.json"
+    path.write_text(json.dumps(doc_dict), encoding="utf-8")
+    loaded_unit = load_eval_file(path).units[0]
+
+    # Value-null fields in demographics should be dropped
+    assert "vaf" not in loaded_unit.demographics
+    # Existing age field should still be there
+    assert "age" in loaded_unit.demographics
+    # Value-null outcome should become None
+    assert loaded_unit.outcome is None
