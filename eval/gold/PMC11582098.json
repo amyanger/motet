@@ -1,0 +1,1204 @@
+{
+  "pmc_id": "PMC11582098",
+  "pmid": "39251478",
+  "tier": "silver",
+  "verified_by": null,
+  "contamination_check": false,
+  "chosen_because": "multicentric VEXAS case series (8 own patients, CARE-guideline case narratives) with clearly separable per-patient paragraphs, stressing cross-patient text separation",
+  "units": [
+    {
+      "patient_id": "39251478-p1",
+      "text": "Case 1\nAn 80-year-old man presented with a 7-month history of fever unresponsive to antibiotic therapy, weight loss, periorbital oedema, deep venous thrombosis (DVT), anaemia, hydrocele, and elevated acute phase reactants. As part of his diagnostic work-up, he underwent an 18 FDG–PET/CT scan, revealing diffuse metabolic activity in the bone marrow. A bone marrow biopsy ruled out hematologic malignancies but identified vacuoles in myeloid precursor cells. Genetic testing for adult-onset autoinflammatory syndromes was performed and revealed UBA1 c,121 A > G p.(Met41Val) mutation. Two years later, the patient reported a temporal headache, a notable elevation in c-reactive protein (CRP—80 mg/L) and ferritin (2533 ug/L). A temporal artery ultrasound suggested temporal arteritis, prompting an increase in glucocorticoid therapy to prednisone 1 mg/kg/day. This approach quickly improved symptoms and reduced inflammatory markers. To investigate the possibility of large vessel vasculitis, a second 18 FDG–PET/CT was conducted. While metabolic activity of large vessels resulted normal, the PET scan showed a focal hypermetabolic area in the pancreatic isthmus (1.5 cm) with a standardised uptake value (SUV) of 9.8, a satellite area (< 1 cm–SUV 5.3) suggestive of a lymph node (Fig. 1 ), and significant hypermetabolism (SUV 6.7) at the aortic valve consistent with endocarditis (Fig. 2 ). A transesophageal echocardiography (TEE) identified a small (2 mm) vegetation on the aortic valve. Intravenous antibiotic therapy with vancomycin was started, while ongoing glucocorticoid and anticoagulant treatments were continued. All microbiological tests returned negative results. To further examine the pancreatic lesion, a contrast-enhanced CT scan was performed which identified early fibro-adipogenic changes in the pancreas and a small hypodense area (13 mm) in the pancreatic isthmus, which appeared hypoperfused in all contrast phases. Subsequent imaging, utilizing endoscopic ultrasound (EUS) and contrast-enhanced MR imaging, did not detect this lesion, and a biopsy was not possible. All oncologic markers were within normal limits. A follow-up PET/CT, performed 4 weeks later, indicated a reduction in the size and metabolic activity of the main pancreatic lesion (1 cm, SUV 5.3), with the secondary lesion no longer visible. In addition, the valvular uptake was also reduced (SUV 4.6). Fig. 1 Case 1, 18-FDG–PET/CT scans of pancreatic and lymph node hypermetabolism. 18-FDG 18 fluorodeoxyglucose, PET/CT positron emitting tomography/computed tomography Fig. 2 Case 1, 18-FDG–PET/CT scans of aortic valve hypermetabolism. 18-FDG 18 fluorodeoxyglucose, PET/CT positron emitting tomography/computed tomography",
+      "demographics": {
+        "age": {
+          "value": "80",
+          "quote": "80-year-old",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        },
+        "sex": {
+          "value": "male",
+          "quote": "man",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        },
+        "uba1_variant": {
+          "value": "p.Met41Val",
+          "quote": "UBA1 c,121 A > G p.(Met41Val) mutation",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        }
+      },
+      "timeline": [
+        {
+          "symptom": {
+            "value": "fever unresponsive to antibiotics",
+            "quote": "7-month history of fever unresponsive to antibiotic therapy",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "weight loss",
+            "quote": "weight loss",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "periorbital oedema",
+            "quote": "periorbital oedema",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "deep venous thrombosis",
+            "quote": "deep venous thrombosis (DVT)",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "anaemia",
+            "quote": "anaemia",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "hydrocele",
+            "quote": "hydrocele",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "temporal headache",
+            "quote": "temporal headache",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 2
+        },
+        {
+          "symptom": {
+            "value": "temporal arteritis",
+            "quote": "temporal artery ultrasound suggested temporal arteritis",
+            "certainty": "possible",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 2
+        }
+      ],
+      "labs": [
+        {
+          "analyte": {
+            "value": "bone marrow biopsy",
+            "quote": "bone marrow biopsy ruled out hematologic malignancies but identified vacuoles in myeloid precursor cells",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "analyte": {
+            "value": "CRP",
+            "quote": "elevation in c-reactive protein (CRP—80 mg/L)",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "analyte": {
+            "value": "ferritin",
+            "quote": "ferritin (2533 ug/L)",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "analyte": {
+            "value": "PET/CT bone marrow",
+            "quote": "diffuse metabolic activity in the bone marrow",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        }
+      ],
+      "treatments": [
+        {
+          "treatment": {
+            "value": "glucocorticoid therapy",
+            "quote": "increase in glucocorticoid therapy to prednisone 1 mg/kg/day",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "treatment": {
+            "value": "vancomycin",
+            "quote": "Intravenous antibiotic therapy with vancomycin was started",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        }
+      ],
+      "prior_diagnoses": [],
+      "outcome": {
+        "value": "aortic valve hypermetabolism and pancreatic lesion reduced after treatment",
+        "quote": "follow-up PET/CT, performed 4 weeks later, indicated a reduction in the size and metabolic activity of the main pancreatic lesion",
+        "certainty": "positive",
+        "temporality": "present",
+        "experiencer": "patient"
+      },
+      "reason_for_publication": {
+        "value": "PET findings of pancreatic lesion and aortic valve hypermetabolism in VEXAS",
+        "quote": "significant hypermetabolism (SUV 6.7) at the aortic valve consistent with endocarditis",
+        "certainty": "positive",
+        "temporality": "present",
+        "experiencer": "patient"
+      }
+    },
+    {
+      "patient_id": "39251478-p2",
+      "text": "Case 2\nAn 85-year-old man was admitted to the inpatient clinic due to symptoms of relapsing polychondritis, fever, skin vasculitis lesion, and erythema nodosum-like lesions. To rule out systemic vasculitis, an 18-FDG–PET/CT scan was conducted. The imaging revealed diffuse and intense metabolic activity in the bone marrow, with especially high uptake in the right iliac region (SUV 9.6). Other hypermetabolic areas were identified in the spleen (SUV 5.3), right ear and nasal region (current localization of chondritis), the origin of the right subclavian artery (SUV 4.6), left lower lung lobe, and cervical lymph nodes. Treatment with glucocorticoids at a dose of 1 mg/kg/day was started, leading to a swift resolution of clinical symptoms and a reduction in systemic inflammatory markers. Although the bone marrow biopsy and hematologic testing were inconclusive, genetic testing for adult-onset autoinflammatory diseases was carried out, revealing a pathogenetic UBA1 mutation c.122T > C p.(Met41Thr), confirming the diagnosis of VEXAS syndrome.",
+      "demographics": {
+        "age": {
+          "value": "85",
+          "quote": "85-year-old",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        },
+        "sex": {
+          "value": "male",
+          "quote": "man",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        },
+        "uba1_variant": {
+          "value": "p.Met41Thr",
+          "quote": "UBA1 mutation c.122T > C p.(Met41Thr)",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        }
+      },
+      "timeline": [
+        {
+          "symptom": {
+            "value": "relapsing polychondritis",
+            "quote": "symptoms of relapsing polychondritis",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "fever",
+            "quote": "fever",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "skin vasculitis lesion",
+            "quote": "skin vasculitis lesion",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "erythema nodosum-like lesions",
+            "quote": "erythema nodosum-like lesions",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        }
+      ],
+      "labs": [
+        {
+          "analyte": {
+            "value": "PET/CT bone marrow",
+            "quote": "diffuse and intense metabolic activity in the bone marrow, with especially high uptake in the right iliac region (SUV 9.6)",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "analyte": {
+            "value": "bone marrow biopsy",
+            "quote": "bone marrow biopsy and hematologic testing were inconclusive",
+            "certainty": "negated",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        }
+      ],
+      "treatments": [
+        {
+          "treatment": {
+            "value": "glucocorticoids",
+            "quote": "Treatment with glucocorticoids at a dose of 1 mg/kg/day was started, leading to a swift resolution of clinical symptoms",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        }
+      ],
+      "prior_diagnoses": [],
+      "outcome": {
+        "value": "swift resolution of clinical symptoms and reduced inflammatory markers",
+        "quote": "leading to a swift resolution of clinical symptoms and a reduction in systemic inflammatory markers",
+        "certainty": "positive",
+        "temporality": "present",
+        "experiencer": "patient"
+      },
+      "reason_for_publication": null
+    },
+    {
+      "patient_id": "39251478-p3",
+      "text": "Case 3\nA 75-year-old man was followed at the outpatient due to a 4-year history of elevated acute phase reactants, thrombocytopenia, fever, recurrent thrombophlebitis, and erythema nodosum. As part of this diagnostic evaluation, a PET–CT scan was conducted, revealing only a diffuse bone marrow hypermetabolism. An initial diagnosis of unclassified autoinflammatory fever was made, leading to treatment with glucocorticoids, anakinra (which was discontinued due to lymphopenia), and tocilizumab (discontinued due to neutropenia and infections). Given the persistent thrombocytopenia, he later underwent a bone marrow examination. This showed vacuoles in the myeloid precursor cells. Consequently, UBA1 genetic testing was conducted, revealing a p.Met41Val mutation. In conjunction with the clinical presentation, these findings confirmed a diagnosis of VEXAS syndrome.",
+      "demographics": {
+        "age": {
+          "value": "75",
+          "quote": "75-year-old",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        },
+        "sex": {
+          "value": "male",
+          "quote": "man",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        },
+        "uba1_variant": {
+          "value": "p.Met41Val",
+          "quote": "p.Met41Val mutation",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        }
+      },
+      "timeline": [
+        {
+          "symptom": {
+            "value": "elevated acute phase reactants",
+            "quote": "4-year history of elevated acute phase reactants",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "thrombocytopenia",
+            "quote": "thrombocytopenia",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "fever",
+            "quote": "fever",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "recurrent thrombophlebitis",
+            "quote": "recurrent thrombophlebitis",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "erythema nodosum",
+            "quote": "erythema nodosum",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        }
+      ],
+      "labs": [
+        {
+          "analyte": {
+            "value": "PET-CT bone marrow",
+            "quote": "diffuse bone marrow hypermetabolism",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "analyte": {
+            "value": "bone marrow examination",
+            "quote": "This showed vacuoles in the myeloid precursor cells",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        }
+      ],
+      "treatments": [
+        {
+          "treatment": {
+            "value": "glucocorticoids",
+            "quote": "treatment with glucocorticoids",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "treatment": {
+            "value": "anakinra",
+            "quote": "anakinra (which was discontinued due to lymphopenia)",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "treatment": {
+            "value": "tocilizumab",
+            "quote": "tocilizumab (discontinued due to neutropenia and infections)",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        }
+      ],
+      "prior_diagnoses": [
+        {
+          "value": "unclassified autoinflammatory fever",
+          "quote": "An initial diagnosis of unclassified autoinflammatory fever was made",
+          "certainty": "positive",
+          "temporality": "past_history",
+          "experiencer": "patient"
+        }
+      ],
+      "outcome": null,
+      "reason_for_publication": null
+    },
+    {
+      "patient_id": "39251478-p4",
+      "text": "Case 4\nIn 2019, a 60-year-old man was admitted to the hospital due to recurrent fever, elevated inflammatory markers (including CRP, serum amyloid A and ferritin), macrocytic anaemia, widespread arthralgias and auricular chondritis. In addition, he presented with a skin rash consistent with Sweet’s syndrome. Throughout his hospital stay, he underwent several laboratory tests and diagnostic procedures, which ruled out infections or haematological malignancies. A bone marrow biopsy revealed vacuolization in myeloid precursor cells. At that time, UBA1 genetic testing was not yet available, so a Sanger sequencing of the MEFV gene was conducted, without evidence of significant mutations on exon 10. A subsequent 18F-FDG–PET/CT scan detected uptakes in cervical lymph nodes (SUV max 6.31). Despite several immunosuppressive treatments, the patient did not observe any significant benefit. Given the suspicion of VEXAS syndrome, UBA1 genetic analysis was carried out in 2021, which detected the p.Met41Thr mutation. The patient was then treated with upadacitinib 15 mg/day, leading to a significant remission in clinical symptoms and a decrease in inflammatory markers. However, after 6 months of treatment, he developed a severe lung infection. He was readmitted to the hospital, but unfortunately died a few weeks later, even after receiving adequate antimicrobial treatments.",
+      "demographics": {
+        "age": {
+          "value": "60",
+          "quote": "60-year-old",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        },
+        "sex": {
+          "value": "male",
+          "quote": "man",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        },
+        "uba1_variant": {
+          "value": "p.Met41Thr",
+          "quote": "UBA1 genetic analysis was carried out in 2021, which detected the p.Met41Thr mutation",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        }
+      },
+      "timeline": [
+        {
+          "symptom": {
+            "value": "recurrent fever",
+            "quote": "recurrent fever",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "macrocytic anaemia",
+            "quote": "macrocytic anaemia",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "widespread arthralgias",
+            "quote": "widespread arthralgias",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "auricular chondritis",
+            "quote": "auricular chondritis",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "Sweet's syndrome rash",
+            "quote": "skin rash consistent with Sweet's syndrome",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "severe lung infection",
+            "quote": "he developed a severe lung infection",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 2
+        }
+      ],
+      "labs": [
+        {
+          "analyte": {
+            "value": "inflammatory markers",
+            "quote": "elevated inflammatory markers (including CRP, serum amyloid A and ferritin)",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "analyte": {
+            "value": "bone marrow biopsy",
+            "quote": "bone marrow biopsy revealed vacuolization in myeloid precursor cells",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "analyte": {
+            "value": "MEFV gene sequencing",
+            "quote": "Sanger sequencing of the MEFV gene was conducted, without evidence of significant mutations on exon 10",
+            "certainty": "negated",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "analyte": {
+            "value": "PET/CT cervical lymph nodes",
+            "quote": "18F-FDG–PET/CT scan detected uptakes in cervical lymph nodes (SUV max 6.31)",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        }
+      ],
+      "treatments": [
+        {
+          "treatment": {
+            "value": "upadacitinib",
+            "quote": "treated with upadacitinib 15 mg/day, leading to a significant remission in clinical symptoms",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        }
+      ],
+      "prior_diagnoses": [],
+      "outcome": {
+        "value": "died after severe lung infection despite antimicrobial treatment",
+        "quote": "he was readmitted to the hospital, but unfortunately died a few weeks later, even after receiving adequate antimicrobial treatments",
+        "certainty": "positive",
+        "temporality": "present",
+        "experiencer": "patient"
+      },
+      "reason_for_publication": null
+    },
+    {
+      "patient_id": "39251478-p5",
+      "text": "Case 5\nAn 85-year-old man was admitted to the hospital with suspected polymyalgia rheumatica due to symptoms of fever, muscle pain and stiffness, particularly in the shoulders, hips, and upper arms. An elevated CRP was also noted. His medical history revealed prior deep vein thrombosis in the lower limbs, for which he was on oral anticoagulants, and an episode of crystal-induced arthritis in his left wrist. To rule out potential malignancies, he underwent an 18 F-FDG–PET/CT scan, which detected diffuse uptakes in lymph nodes (paratracheal region, aortopulmonary window, subcarinal area, hilas, and left axillary). In addition, non-specific uptakes were observed at the base of the right lung, right humeral scapula, right carpal, and the periprosthetic tissues of the right hip and of the left knee. Specific SUV values were not provided. Subsequently, the patient started with glucocorticoids and methotrexate at 15 mg/week. This regimen only provided partial relief. Six months later, he developed chondritis in his left ear, and his CRP levels remained elevated despite ongoing treatment. A follow-up PET–CT indicated consistent uptakes in the previously identified regions. Due to the potential of VEXAS syndrome, genetic testing was pursued, uncovering the c.118-1G > C mutation in the UBA1 gene. He started a JAK-1 selective inhibitor, filgotinib 200 mg/day, with rapidly alleviated both his clinical and laboratory markers.",
+      "demographics": {
+        "age": {
+          "value": "85",
+          "quote": "85-year-old",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        },
+        "sex": {
+          "value": "male",
+          "quote": "man",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        },
+        "uba1_variant": {
+          "value": "c.118-1G>C",
+          "quote": "c.118-1G > C mutation in the UBA1 gene",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        }
+      },
+      "timeline": [
+        {
+          "symptom": {
+            "value": "fever",
+            "quote": "fever",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "muscle pain and stiffness",
+            "quote": "muscle pain and stiffness, particularly in the shoulders, hips, and upper arms",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "chondritis in left ear",
+            "quote": "he developed chondritis in his left ear",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 2
+        }
+      ],
+      "labs": [
+        {
+          "analyte": {
+            "value": "CRP",
+            "quote": "An elevated CRP was also noted",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "analyte": {
+            "value": "PET/CT lymph nodes",
+            "quote": "diffuse uptakes in lymph nodes (paratracheal region, aortopulmonary window, subcarinal area, hilas, and left axillary)",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        }
+      ],
+      "treatments": [
+        {
+          "treatment": {
+            "value": "glucocorticoids",
+            "quote": "started with glucocorticoids and methotrexate at 15 mg/week",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "treatment": {
+            "value": "methotrexate",
+            "quote": "methotrexate at 15 mg/week",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "treatment": {
+            "value": "filgotinib",
+            "quote": "started a JAK-1 selective inhibitor, filgotinib 200 mg/day, with rapidly alleviated both his clinical and laboratory markers",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        }
+      ],
+      "prior_diagnoses": [
+        {
+          "value": "polymyalgia rheumatica",
+          "quote": "admitted to the hospital with suspected polymyalgia rheumatica",
+          "certainty": "possible",
+          "temporality": "past_history",
+          "experiencer": "patient"
+        },
+        {
+          "value": "deep vein thrombosis",
+          "quote": "prior deep vein thrombosis in the lower limbs",
+          "certainty": "positive",
+          "temporality": "past_history",
+          "experiencer": "patient"
+        },
+        {
+          "value": "crystal-induced arthritis",
+          "quote": "an episode of crystal-induced arthritis in his left wrist",
+          "certainty": "positive",
+          "temporality": "past_history",
+          "experiencer": "patient"
+        }
+      ],
+      "outcome": {
+        "value": "rapid alleviation of clinical and laboratory markers on filgotinib",
+        "quote": "with rapidly alleviated both his clinical and laboratory markers",
+        "certainty": "positive",
+        "temporality": "present",
+        "experiencer": "patient"
+      },
+      "reason_for_publication": null
+    },
+    {
+      "patient_id": "39251478-p6",
+      "text": "Case 6\nIn 2017, a 68-year-old man was admitted to the hospital due to hyperpyrexia, arthritis, sensitive neuropathy, widespread vasculitic lesions, polyserositis and chondritis affecting both the ear and nose. A PET–CT scan identified areas of non-uniform hypermetabolism in the thigh muscles and pelvis. Metabolic activity was also detected in the right upper limb and bone marrow. He was diagnosed with recurrent polychondritis and, from 2017 until the present, was treated with varying doses of glucocorticoids, intravenous immunoglobulins, anakinra, colchicine, and ultimately methotrexate (up to 20 mg/week). These treatments provided only temporary relief. Due to persistently elevated CRP levels and the suspicion of VEXAS syndrome, genetic testing was conducted. The results revealed a p.Met41Leu mutation in the UBA1 gene, confirming the diagnosis of VEXAS syndrome.",
+      "demographics": {
+        "age": {
+          "value": "68",
+          "quote": "68-year-old",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        },
+        "sex": {
+          "value": "male",
+          "quote": "man",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        },
+        "uba1_variant": {
+          "value": "p.Met41Leu",
+          "quote": "p.Met41Leu mutation in the UBA1 gene",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        }
+      },
+      "timeline": [
+        {
+          "symptom": {
+            "value": "hyperpyrexia",
+            "quote": "hyperpyrexia",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "arthritis",
+            "quote": "arthritis",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "sensitive neuropathy",
+            "quote": "sensitive neuropathy",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "widespread vasculitic lesions",
+            "quote": "widespread vasculitic lesions",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "polyserositis",
+            "quote": "polyserositis",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "chondritis affecting ear and nose",
+            "quote": "chondritis affecting both the ear and nose",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        }
+      ],
+      "labs": [
+        {
+          "analyte": {
+            "value": "PET-CT",
+            "quote": "areas of non-uniform hypermetabolism in the thigh muscles and pelvis",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "analyte": {
+            "value": "CRP",
+            "quote": "persistently elevated CRP levels",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        }
+      ],
+      "treatments": [
+        {
+          "treatment": {
+            "value": "glucocorticoids",
+            "quote": "treated with varying doses of glucocorticoids",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "treatment": {
+            "value": "intravenous immunoglobulins",
+            "quote": "intravenous immunoglobulins",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "treatment": {
+            "value": "anakinra",
+            "quote": "anakinra",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "treatment": {
+            "value": "colchicine",
+            "quote": "colchicine",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "treatment": {
+            "value": "methotrexate",
+            "quote": "ultimately methotrexate (up to 20 mg/week)",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        }
+      ],
+      "prior_diagnoses": [
+        {
+          "value": "recurrent polychondritis",
+          "quote": "He was diagnosed with recurrent polychondritis",
+          "certainty": "positive",
+          "temporality": "past_history",
+          "experiencer": "patient"
+        }
+      ],
+      "outcome": {
+        "value": "only temporary relief from treatments",
+        "quote": "These treatments provided only temporary relief",
+        "certainty": "positive",
+        "temporality": "present",
+        "experiencer": "patient"
+      },
+      "reason_for_publication": null
+    },
+    {
+      "patient_id": "39251478-p7",
+      "text": "Case 7\nAn 82-year-old man was admitted to the hospital due to symptoms resembling chronic urticaria and fever. Consequently, he was treated with several therapies including glucocorticoids, TNF-alpha inhibitors, and the anti-IgE omalizumab. Later, he developed additional complications, including pleural effusion, peripheral neuropathy, arthritis, lower limb edemas, right scleritis, and chondritis affecting both the ear and nose. A 18 F-FDG–PET–CT scan revealed increased uptake in both upper and lower limbs as well as in the though specific SUV values and the exact vessels involved were not specified. The bone marrow biopsy did not provide a conclusive diagnosis. However, due to the persistent fever, inflammation, and macrocytic anaemia, he underwent genetic testing. This revealed the p.Met41Leu mutation in the UBA1 gene, confirming suspicions of VEXAS syndrome. The patient was then prescribed glucocorticoids, with a dosage ranging between 12.5 and 10 mg/day, which effectively managed his condition.",
+      "demographics": {
+        "age": {
+          "value": "82",
+          "quote": "82-year-old",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        },
+        "sex": {
+          "value": "male",
+          "quote": "man",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        },
+        "uba1_variant": {
+          "value": "p.Met41Leu",
+          "quote": "p.Met41Leu mutation in the UBA1 gene",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        }
+      },
+      "timeline": [
+        {
+          "symptom": {
+            "value": "chronic urticaria-like symptoms",
+            "quote": "symptoms resembling chronic urticaria",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "fever",
+            "quote": "fever",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "pleural effusion",
+            "quote": "pleural effusion",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 2
+        },
+        {
+          "symptom": {
+            "value": "peripheral neuropathy",
+            "quote": "peripheral neuropathy",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 2
+        },
+        {
+          "symptom": {
+            "value": "arthritis",
+            "quote": "arthritis",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 2
+        },
+        {
+          "symptom": {
+            "value": "lower limb edemas",
+            "quote": "lower limb edemas",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 2
+        },
+        {
+          "symptom": {
+            "value": "right scleritis",
+            "quote": "right scleritis",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 2
+        },
+        {
+          "symptom": {
+            "value": "chondritis affecting ear and nose",
+            "quote": "chondritis affecting both the ear and nose",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 2
+        }
+      ],
+      "labs": [
+        {
+          "analyte": {
+            "value": "bone marrow biopsy",
+            "quote": "bone marrow biopsy did not provide a conclusive diagnosis",
+            "certainty": "negated",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "analyte": {
+            "value": "PET-CT",
+            "quote": "increased uptake in both upper and lower limbs",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "analyte": {
+            "value": "macrocytic anaemia",
+            "quote": "macrocytic anaemia",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        }
+      ],
+      "treatments": [
+        {
+          "treatment": {
+            "value": "glucocorticoids",
+            "quote": "treated with several therapies including glucocorticoids",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "treatment": {
+            "value": "TNF-alpha inhibitors",
+            "quote": "TNF-alpha inhibitors",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "treatment": {
+            "value": "omalizumab",
+            "quote": "the anti-IgE omalizumab",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        }
+      ],
+      "prior_diagnoses": [],
+      "outcome": {
+        "value": "condition effectively managed on glucocorticoids",
+        "quote": "which effectively managed his condition",
+        "certainty": "positive",
+        "temporality": "present",
+        "experiencer": "patient"
+      },
+      "reason_for_publication": null
+    },
+    {
+      "patient_id": "39251478-p8",
+      "text": "Case 8\nA 51-year-old man was evaluated at our outpatient clinic due to persistently elevated acute phase reactants associated with a history of deep and superficial vein thrombosis of both superior and inferior extremities, for which he was on oral anticoagulants. His past medical history revealed a myelodysplastic syndrome and a prior episode of preseptal eye cellulitis. Plasmatic IgG-4 were increased (254 mg/dl ULN 104 mg/dl), suggesting a possible IgG-4-related disease. An 18F-FDG–PET–CT scan was performed, which identified a para-aortic infiltrative tissue near the thoracic aorta with increased uptake (SUV 6.7) and a diffuse bone marrow hypermetabolism (Fig. 3 ). In addition, the patient developed polychondritis and panniculitis. For these findings, the patient was treated with glucocorticoids with a prompt resolution of the symptoms. A contrast-enhanced CT scan was then performed to characterise better FDG–PET findings, which revealed a reduction in both dimensions and hyperintensity of the para-aortic infiltrative tissue previously identified, and the follow-up angio-MRI performed after 3 months of glucocorticoid therapy showed complete regression of the para-aortic tissue. Following the suspicion of VEXAS syndrome, genetic testing was performed, revealing c.122 T > C p.(Met41Thr) mutation in the UBA1 gene, confirming the diagnosis. Fig. 3 Case 8, 18-FDG–PET/CT scans of para-aortic infiltrative tissue at the level of the thoracic aorta and bone marrow hypermetabolism. 18-FDG 18 fluorodeoxyglucose, PET/CT positron emitting tomography/computed tomography",
+      "demographics": {
+        "age": {
+          "value": "51",
+          "quote": "51-year-old",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        },
+        "sex": {
+          "value": "male",
+          "quote": "man",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        },
+        "uba1_variant": {
+          "value": "p.Met41Thr",
+          "quote": "c.122 T > C p.(Met41Thr) mutation in the UBA1 gene",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        }
+      },
+      "timeline": [
+        {
+          "symptom": {
+            "value": "persistently elevated acute phase reactants",
+            "quote": "persistently elevated acute phase reactants",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "polychondritis",
+            "quote": "the patient developed polychondritis",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 2
+        },
+        {
+          "symptom": {
+            "value": "panniculitis",
+            "quote": "panniculitis",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 2
+        }
+      ],
+      "labs": [
+        {
+          "analyte": {
+            "value": "plasmatic IgG-4",
+            "quote": "Plasmatic IgG-4 were increased (254 mg/dl ULN 104 mg/dl)",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "analyte": {
+            "value": "PET-CT para-aortic tissue",
+            "quote": "para-aortic infiltrative tissue near the thoracic aorta with increased uptake (SUV 6.7)",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "analyte": {
+            "value": "PET-CT bone marrow",
+            "quote": "diffuse bone marrow hypermetabolism",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        }
+      ],
+      "treatments": [
+        {
+          "treatment": {
+            "value": "glucocorticoids",
+            "quote": "treated with glucocorticoids with a prompt resolution of the symptoms",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        }
+      ],
+      "prior_diagnoses": [
+        {
+          "value": "myelodysplastic syndrome",
+          "quote": "past medical history revealed a myelodysplastic syndrome",
+          "certainty": "positive",
+          "temporality": "past_history",
+          "experiencer": "patient"
+        },
+        {
+          "value": "preseptal eye cellulitis",
+          "quote": "a prior episode of preseptal eye cellulitis",
+          "certainty": "positive",
+          "temporality": "past_history",
+          "experiencer": "patient"
+        }
+      ],
+      "outcome": {
+        "value": "complete regression of para-aortic tissue after 3 months of glucocorticoid therapy",
+        "quote": "follow-up angio-MRI performed after 3 months of glucocorticoid therapy showed complete regression of the para-aortic tissue",
+        "certainty": "positive",
+        "temporality": "present",
+        "experiencer": "patient"
+      },
+      "reason_for_publication": {
+        "value": "possible IgG-4-related disease initially suspected",
+        "quote": "suggesting a possible IgG-4-related disease",
+        "certainty": "possible",
+        "temporality": "present",
+        "experiencer": "patient"
+      }
+    }
+  ]
+}
