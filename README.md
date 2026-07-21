@@ -99,6 +99,24 @@ Output is hypothesis-generating. It is not evidence of treatment effect.
   validated against pinned releases; the model may re-rank but never invent
   an ID. Units are converted in code, never by the model.
 
+## How good is the extraction
+
+`motet eval` scores the pipeline's per-field output against hand-authored
+answer keys in `eval/gold/`, fully offline. It reports precision, recall, and
+F1 per field category, a separate assertion-axis accuracy number (how often
+certainty / temporality / experiencer are right on the fields it did find), and
+an abstention check on papers that only mention the disease in a differential.
+
+Answer keys are tiered: `silver` (Claude-authored under a stricter whole-paper
+protocol) and `gold` (human-verified). The two tiers are reported separately
+and never blended. Silver numbers carry an inherent inflation risk because the
+same model can author both the key and the by-hand prediction; the gold tier
+exists to remove that risk for any published figure.
+
+```bash
+motet eval
+```
+
 ## How it works
 
 An eight-stage disk-cached pipeline:

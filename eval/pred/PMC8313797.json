@@ -1,0 +1,569 @@
+{
+  "pmc_id": "PMC8313797",
+  "pmid": "34337120",
+  "tier": "silver",
+  "verified_by": null,
+  "contamination_check": false,
+  "units": [
+    {
+      "patient_id": "34337120-p1",
+      "text": "Introduction\nVacuoles, E1 enzyme, X-linked, autoinflammatory, somatic (VEXAS) syndrome is a newly described, acquired autoinflammatory syndrome that can often follow a severe and fatal course. This disorder is characterized by a somatic loss of function mutation affecting the UBA1 gene, resulting in the activation of the innate immune system and widespread systemic inflammation. Patients frequently present with cutaneous involvement, including neutrophilic dermatitis, vasculitis, and chondritis. The following case summarizes the characteristic features of this disease and highlights the importance of dermatology in recognizing patients with this condition, particularly given its progressive\u2014and often refractory\u2014nature.\n\nCase report\nA man in his 60s presented with a generalized eruption associated with recurrent fever, polyarthritis, macrocytic anemia, and leukopenia. He had been evaluated by hematology, and initial bone marrow biopsy was notable for hypercellularity and mild reticulin fibrosis with normal karyotype and microarray results. The rheumatology department was consulted for diffuse synovitis, with laboratory test results notable for elevated inflammatory markers, low positive rheumatoid factor (15 IU/mL), and negative cyclic citrullinated peptide and antinuclear antibodies. Cutaneous examination revealed multiple edematous, erythematous plaques on the trunk and extremities ( Fig 1 ). A punch biopsy demonstrated an abundance of neutrophils and nuclear debris that filled the papillary dermis with papillary dermal edema ( Fig 2 ). Tissue cultures were negative. He was subsequently diagnosed with Sweet syndrome with suspected autoimmune myelofibrosis. Treatment with oral prednisone was initiated at 0.8\u00a0mg/kg/d with complete resolution of symptoms. Fig 1 Multiple edematous, erythematous plaques on the trunk and extremities. Fig 2 Punch biopsy from the skin of the upper arm demonstrating an abundance of neutrophils and nuclear debris that fills the dermis and subcutaneous fat. Note the absence of vasculitis. (Hematoxylin-eosin stain; original magnification: \u00d740.)\nOver the subsequent months, attempts to decrease oral prednisone dose were made using several steroid-sparing agents, including colchicine, supersaturated potassium iodide (SSKI), dapsone, adalimumab, etanercept, abatacept, tocilizumab, anakinra, tofacitinib, and intravenous immunoglobulin. Despite these interventions, disease recurrence\u2014characterized by cutaneous lesions, fevers, and arthralgias with intermittent dyspnea\u2014occurred each time the prednisone dose was decreased below 25\u00a0mg to 35\u00a0mg daily. Skin lesions were consistent with neutrophilic dermatitis without clinical features of chondritis or vasculitis. Infectious complications (including pneumonia and diverticulitis) also occurred, requiring treatment. A repeat bone marrow biopsy demonstrated hypercellularity, ring sideroblasts, and vacuolated erythroid and myeloid precursors ( Fig 3 ). Following a recent publication by Beck et\u00a0al, 1 collaboration with the National Institutes of Health was pursued. Genomic sequencing revealed a somatic mutation in UBA1 c.121 A>C (p.Met41Leu). He was subsequently diagnosed with VEXAS syndrome and is currently under consideration for alternative treatment modalities, including allogeneic transplantation. Fig 3 Cytoplasmic vacuoles were present in proerythroblasts and myeloid precursor cells in the bone marrow aspirate smear. (Wright-Giemsa stain; original magnification: \u00d7200.)\n\nDiscussion\nIn a recent publication, 1 a novel autoinflammatory disorder termed VEXAS syndrome was described in a cohort of 25 adult men. This treatment-resistant, often fatal syndrome is characterized by recurrent fever, cytopenias, dysplastic bone marrow with vacuolated myeloid and erythroid precursors, and cutaneous and pulmonary inflammation. 1 Cutaneous features were present in 88% of patients in the initial cohort and included neutrophilic dermatitis, vasculitis, and chondritis, with many carrying a diagnosis of relapsing polychondritis, Sweet syndrome, polyarteritis nodosa, or giant cell arteritis prior to sequencing. All patients were found to have an acquired loss of function somatic mutation affecting methionine-41 in UBA1 , a gene encoding ubiquitin-activating enzyme 1, which resides on the X chromosome. Disease-causing mutations result in the loss of the normal, cytoplasmic isoform of UBA1 and a decrease in cytoplasmic ubiquitylation, a type of posttranslational modification crucial for intracellular signaling and protein degradation. This results in increased activation of the innate immune system and widespread systemic inflammation, driven by mutant myeloid cells. 1\nAlthough the characterization of VEXAS syndrome is ongoing, the original cohort was similarly responsive only to systemic corticosteroids, despite the use of alternative agents. This disorder may follow a fatal course, with 40% of the cohort dying from disease-related causes (eg, respiratory failure, progressive anemia, complications from long-term steroid use). Further research is needed to explore bone marrow transplantation or gene-editing therapies as potential treatment modalities. 1\nHere, we presented a case of neutrophilic dermatitis in an adult man with recurrent fever, polyarthritis, and anemia exclusively responsive to systemic corticosteroids. UBA1 mutation, characteristic of VEXAS syndrome, was confirmed in him via sequencing. Dermatologists should be aware of this newly described disorder and consider it in adult men with features of autoinflammation, hematologic abnormalities (eg, cytopenias, myeloid dyspoiesis), and characteristic cutaneous lesions (eg, neutrophilic dermatitis, chondritis, vasculitis). Recognition of the accompanying systemic manifestations, demographic features, and the refractory nature of the disease is essential as no specific morphologic discriminators have yet been identified. Early recognition and diagnosis may lead to a better prognosis and targeted treatments in the near future.\n\nConflicts of interest\nNone disclosed.",
+      "demographics": {
+        "age": {
+          "value": "60s",
+          "quote": "A man in his 60s",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        },
+        "sex": {
+          "value": "male",
+          "quote": "A man in his 60s",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        },
+        "uba1_variant": {
+          "value": "c.121 A>C (p.Met41Leu)",
+          "quote": "UBA1 c.121 A>C (p.Met41Leu)",
+          "certainty": "positive",
+          "temporality": "present",
+          "experiencer": "patient"
+        }
+      },
+      "timeline": [
+        {
+          "symptom": {
+            "value": "a generalized eruption",
+            "quote": "a generalized eruption",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "recurrent fever",
+            "quote": "recurrent fever",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "polyarthritis",
+            "quote": "polyarthritis",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "macrocytic anemia",
+            "quote": "macrocytic anemia",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "leukopenia",
+            "quote": "leukopenia",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "diffuse synovitis",
+            "quote": "diffuse synovitis",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "multiple edematous, erythematous plaques on the trunk and extremities",
+            "quote": "multiple edematous, erythematous plaques on the trunk and extremities",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 1
+        },
+        {
+          "symptom": {
+            "value": "cutaneous lesions",
+            "quote": "characterized by cutaneous lesions, fevers, and arthralgias with intermittent dyspnea",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 2
+        },
+        {
+          "symptom": {
+            "value": "fevers",
+            "quote": "characterized by cutaneous lesions, fevers, and arthralgias with intermittent dyspnea",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 2
+        },
+        {
+          "symptom": {
+            "value": "arthralgias",
+            "quote": "characterized by cutaneous lesions, fevers, and arthralgias with intermittent dyspnea",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 2
+        },
+        {
+          "symptom": {
+            "value": "intermittent dyspnea",
+            "quote": "characterized by cutaneous lesions, fevers, and arthralgias with intermittent dyspnea",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 2
+        },
+        {
+          "symptom": {
+            "value": "pneumonia",
+            "quote": "Infectious complications (including pneumonia and diverticulitis) also occurred, requiring treatment.",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 3
+        },
+        {
+          "symptom": {
+            "value": "diverticulitis",
+            "quote": "Infectious complications (including pneumonia and diverticulitis) also occurred, requiring treatment.",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "sequence_index": 3
+        }
+      ],
+      "labs": [
+        {
+          "analyte": {
+            "value": "inflammatory markers",
+            "quote": "elevated inflammatory markers",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "analyte": {
+            "value": "rheumatoid factor",
+            "quote": "low positive rheumatoid factor (15 IU/mL)",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "value_as_written": "15",
+          "unit_as_written": "IU/mL"
+        },
+        {
+          "analyte": {
+            "value": "cyclic citrullinated peptide",
+            "quote": "negative cyclic citrullinated peptide and antinuclear antibodies",
+            "certainty": "negated",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "analyte": {
+            "value": "antinuclear antibodies",
+            "quote": "negative cyclic citrullinated peptide and antinuclear antibodies",
+            "certainty": "negated",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "analyte": {
+            "value": "bone marrow biopsy cellularity",
+            "quote": "initial bone marrow biopsy was notable for hypercellularity and mild reticulin fibrosis",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "value_as_written": "hypercellularity"
+        },
+        {
+          "analyte": {
+            "value": "reticulin fibrosis",
+            "quote": "mild reticulin fibrosis",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "value_as_written": "mild"
+        },
+        {
+          "analyte": {
+            "value": "karyotype",
+            "quote": "normal karyotype and microarray results",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "value_as_written": "normal"
+        },
+        {
+          "analyte": {
+            "value": "microarray",
+            "quote": "normal karyotype and microarray results",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "value_as_written": "normal"
+        },
+        {
+          "analyte": {
+            "value": "tissue cultures",
+            "quote": "Tissue cultures were negative.",
+            "certainty": "negated",
+            "temporality": "present",
+            "experiencer": "patient"
+          }
+        },
+        {
+          "analyte": {
+            "value": "repeat bone marrow biopsy",
+            "quote": "A repeat bone marrow biopsy demonstrated hypercellularity, ring sideroblasts, and vacuolated erythroid and myeloid precursors",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "value_as_written": "hypercellularity, ring sideroblasts, and vacuolated erythroid and myeloid precursors"
+        }
+      ],
+      "treatments": [
+        {
+          "treatment": {
+            "value": "oral prednisone",
+            "quote": "Treatment with oral prednisone was initiated at 0.8\u00a0mg/kg/d with complete resolution of symptoms.",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "line_of_therapy": 1,
+          "dose_as_written": "0.8\u00a0mg/kg/d",
+          "steroid_dose_before": null,
+          "steroid_dose_after": null,
+          "crp_before": null,
+          "crp_after": null,
+          "hemoglobin_after": null,
+          "platelets_after": null,
+          "symptom_resolution": {
+            "value": "complete resolution of symptoms",
+            "quote": "complete resolution of symptoms",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "follow_up_duration": null,
+          "author_response_label": null
+        },
+        {
+          "treatment": {
+            "value": "colchicine",
+            "quote": "several steroid-sparing agents, including colchicine, supersaturated potassium iodide (SSKI), dapsone, adalimumab, etanercept, abatacept, tocilizumab, anakinra, tofacitinib, and intravenous immunoglobulin",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "line_of_therapy": 2,
+          "steroid_dose_before": null,
+          "steroid_dose_after": null,
+          "crp_before": null,
+          "crp_after": null,
+          "hemoglobin_after": null,
+          "platelets_after": null,
+          "symptom_resolution": {
+            "value": "disease recurrence occurred",
+            "quote": "disease recurrence\u2014characterized by cutaneous lesions, fevers, and arthralgias with intermittent dyspnea\u2014occurred each time the prednisone dose was decreased below 25\u00a0mg to 35\u00a0mg daily",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "follow_up_duration": null,
+          "author_response_label": null
+        },
+        {
+          "treatment": {
+            "value": "supersaturated potassium iodide (SSKI)",
+            "quote": "supersaturated potassium iodide (SSKI)",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "line_of_therapy": 3,
+          "steroid_dose_before": null,
+          "steroid_dose_after": null,
+          "crp_before": null,
+          "crp_after": null,
+          "hemoglobin_after": null,
+          "platelets_after": null,
+          "symptom_resolution": {
+            "value": "disease recurrence occurred",
+            "quote": "disease recurrence\u2014characterized by cutaneous lesions, fevers, and arthralgias with intermittent dyspnea\u2014occurred each time the prednisone dose was decreased below 25\u00a0mg to 35\u00a0mg daily",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "follow_up_duration": null,
+          "author_response_label": null
+        },
+        {
+          "treatment": {
+            "value": "dapsone",
+            "quote": "dapsone",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "line_of_therapy": 4,
+          "steroid_dose_before": null,
+          "steroid_dose_after": null,
+          "crp_before": null,
+          "crp_after": null,
+          "hemoglobin_after": null,
+          "platelets_after": null,
+          "symptom_resolution": {
+            "value": "disease recurrence occurred",
+            "quote": "disease recurrence\u2014characterized by cutaneous lesions, fevers, and arthralgias with intermittent dyspnea\u2014occurred each time the prednisone dose was decreased below 25\u00a0mg to 35\u00a0mg daily",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "follow_up_duration": null,
+          "author_response_label": null
+        },
+        {
+          "treatment": {
+            "value": "adalimumab",
+            "quote": "adalimumab",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "line_of_therapy": 5,
+          "steroid_dose_before": null,
+          "steroid_dose_after": null,
+          "crp_before": null,
+          "crp_after": null,
+          "hemoglobin_after": null,
+          "platelets_after": null,
+          "symptom_resolution": {
+            "value": "disease recurrence occurred",
+            "quote": "disease recurrence\u2014characterized by cutaneous lesions, fevers, and arthralgias with intermittent dyspnea\u2014occurred each time the prednisone dose was decreased below 25\u00a0mg to 35\u00a0mg daily",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "follow_up_duration": null,
+          "author_response_label": null
+        },
+        {
+          "treatment": {
+            "value": "etanercept",
+            "quote": "etanercept",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "line_of_therapy": 6,
+          "steroid_dose_before": null,
+          "steroid_dose_after": null,
+          "crp_before": null,
+          "crp_after": null,
+          "hemoglobin_after": null,
+          "platelets_after": null,
+          "symptom_resolution": {
+            "value": "disease recurrence occurred",
+            "quote": "disease recurrence\u2014characterized by cutaneous lesions, fevers, and arthralgias with intermittent dyspnea\u2014occurred each time the prednisone dose was decreased below 25\u00a0mg to 35\u00a0mg daily",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "follow_up_duration": null,
+          "author_response_label": null
+        },
+        {
+          "treatment": {
+            "value": "abatacept",
+            "quote": "abatacept",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "line_of_therapy": 7,
+          "steroid_dose_before": null,
+          "steroid_dose_after": null,
+          "crp_before": null,
+          "crp_after": null,
+          "hemoglobin_after": null,
+          "platelets_after": null,
+          "symptom_resolution": {
+            "value": "disease recurrence occurred",
+            "quote": "disease recurrence\u2014characterized by cutaneous lesions, fevers, and arthralgias with intermittent dyspnea\u2014occurred each time the prednisone dose was decreased below 25\u00a0mg to 35\u00a0mg daily",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "follow_up_duration": null,
+          "author_response_label": null
+        },
+        {
+          "treatment": {
+            "value": "tocilizumab",
+            "quote": "tocilizumab",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "line_of_therapy": 8,
+          "steroid_dose_before": null,
+          "steroid_dose_after": null,
+          "crp_before": null,
+          "crp_after": null,
+          "hemoglobin_after": null,
+          "platelets_after": null,
+          "symptom_resolution": {
+            "value": "disease recurrence occurred",
+            "quote": "disease recurrence\u2014characterized by cutaneous lesions, fevers, and arthralgias with intermittent dyspnea\u2014occurred each time the prednisone dose was decreased below 25\u00a0mg to 35\u00a0mg daily",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "follow_up_duration": null,
+          "author_response_label": null
+        },
+        {
+          "treatment": {
+            "value": "anakinra",
+            "quote": "anakinra",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "line_of_therapy": 9,
+          "steroid_dose_before": null,
+          "steroid_dose_after": null,
+          "crp_before": null,
+          "crp_after": null,
+          "hemoglobin_after": null,
+          "platelets_after": null,
+          "symptom_resolution": {
+            "value": "disease recurrence occurred",
+            "quote": "disease recurrence\u2014characterized by cutaneous lesions, fevers, and arthralgias with intermittent dyspnea\u2014occurred each time the prednisone dose was decreased below 25\u00a0mg to 35\u00a0mg daily",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "follow_up_duration": null,
+          "author_response_label": null
+        },
+        {
+          "treatment": {
+            "value": "tofacitinib",
+            "quote": "tofacitinib",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "line_of_therapy": 10,
+          "steroid_dose_before": null,
+          "steroid_dose_after": null,
+          "crp_before": null,
+          "crp_after": null,
+          "hemoglobin_after": null,
+          "platelets_after": null,
+          "symptom_resolution": {
+            "value": "disease recurrence occurred",
+            "quote": "disease recurrence\u2014characterized by cutaneous lesions, fevers, and arthralgias with intermittent dyspnea\u2014occurred each time the prednisone dose was decreased below 25\u00a0mg to 35\u00a0mg daily",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "follow_up_duration": null,
+          "author_response_label": null
+        },
+        {
+          "treatment": {
+            "value": "intravenous immunoglobulin",
+            "quote": "intravenous immunoglobulin",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "line_of_therapy": 11,
+          "steroid_dose_before": null,
+          "steroid_dose_after": null,
+          "crp_before": null,
+          "crp_after": null,
+          "hemoglobin_after": null,
+          "platelets_after": null,
+          "symptom_resolution": {
+            "value": "disease recurrence occurred",
+            "quote": "disease recurrence\u2014characterized by cutaneous lesions, fevers, and arthralgias with intermittent dyspnea\u2014occurred each time the prednisone dose was decreased below 25\u00a0mg to 35\u00a0mg daily",
+            "certainty": "positive",
+            "temporality": "present",
+            "experiencer": "patient"
+          },
+          "follow_up_duration": null,
+          "author_response_label": null
+        }
+      ],
+      "prior_diagnoses": [
+        {
+          "value": "Sweet syndrome",
+          "quote": "diagnosed with Sweet syndrome with suspected autoimmune myelofibrosis",
+          "certainty": "positive",
+          "temporality": "past_history",
+          "experiencer": "patient"
+        },
+        {
+          "value": "suspected autoimmune myelofibrosis",
+          "quote": "diagnosed with Sweet syndrome with suspected autoimmune myelofibrosis",
+          "certainty": "possible",
+          "temporality": "past_history",
+          "experiencer": "patient"
+        }
+      ],
+      "outcome": {
+        "value": "currently under consideration for alternative treatment modalities, including allogeneic transplantation",
+        "quote": "He was subsequently diagnosed with VEXAS syndrome and is currently under consideration for alternative treatment modalities, including allogeneic transplantation.",
+        "certainty": "positive",
+        "temporality": "present",
+        "experiencer": "patient"
+      },
+      "reason_for_publication": null
+    }
+  ]
+}
