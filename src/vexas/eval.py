@@ -14,6 +14,10 @@ import json
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from vexas.gate import normalize_for_match
+from vexas.normalize.hgvs import normalize_variant
+from vexas.normalize.units import parse_numeric
+
 # Sub-key each list category identifies its item by. The item's other keys
 # (e.g. sequence_index, lab value components) are ignored by v1 scoring.
 _LIST_IDENTIFIER = {
@@ -54,6 +58,65 @@ class EvalDoc:
     verified_by: str | None
     contamination_check: bool
     units: list[EvalUnit] = field(default_factory=list)
+
+
+@dataclass
+class Counts:
+    tp: int = 0
+    fp: int = 0
+    fn: int = 0
+
+    def __add__(self, other: "Counts") -> "Counts":
+        return Counts(self.tp + other.tp, self.fp + other.fp, self.fn + other.fn)
+
+    @property
+    def precision(self) -> float | None:
+        denom = self.tp + self.fp
+        return self.tp / denom if denom else None
+
+    @property
+    def recall(self) -> float | None:
+        denom = self.tp + self.fn
+        return self.tp / denom if denom else None
+
+    @property
+    def f1(self) -> float | None:
+        p, r = self.precision, self.recall
+        if not p or not r:
+            return None
+        return 2 * p * r / (p + r)
+
+
+def values_match(gold: EvalField, pred: EvalField, key: str) -> bool:
+    """True if two fields state the same value, normalization-aware."""
+    if gold.value is None or pred.value is None:
+        return False
+    if key == "uba1_variant":
+        g, p = normalize_variant(gold.value), normalize_variant(pred.value)
+        return g is not None and g == p
+    g_num, p_num = parse_numeric(gold.value), parse_numeric(pred.value)
+    if g_num is not None and p_num is not None:
+        return g_num == p_num
+    return normalize_for_match(gold.value) == normalize_for_match(pred.value)
+
+
+def score_scalar_dict(
+    gold: dict[str, EvalField], pred: dict[str, EvalField]
+) -> Counts:
+    """Score keyed scalar fields. Each key is TP / FP / FN independently."""
+    counts = Counts()
+    for key, gold_field in gold.items():
+        pred_field = pred.get(key)
+        if pred_field is not None and values_match(gold_field, pred_field, key):
+            counts.tp += 1
+        else:
+            counts.fn += 1
+            if pred_field is not None:
+                counts.fp += 1  # present but wrong: both a miss and a false hit
+    for key in pred:
+        if key not in gold:
+            counts.fp += 1
+    return counts
 
 
 def _field(raw: dict | None) -> EvalField | None:
