@@ -178,7 +178,11 @@ gold order (deterministic).
   `"contamination_check": true` (the differential-mention non-case papers), the
   correct behavior is to emit essentially nothing. Scored as pass if the
   prediction's total field count is at or below a small threshold (e.g. <= 2),
-  fail otherwise. Reported as its own line, not folded into P/R/F1.
+  fail otherwise. Reported as its own line, not folded into P/R/F1. A
+  contamination paper's field-level false positives are also deliberately
+  counted into the tier's aggregate precision, in addition to the separate
+  abstention line, because spurious extraction from a non-case paper is a real
+  precision failure.
 
 Quotes are **not** required to match between prediction and gold. The fact is
 what is scored, and the substring gate already guarantees a predicted quote

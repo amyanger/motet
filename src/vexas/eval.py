@@ -82,8 +82,10 @@ class Counts:
     @property
     def f1(self) -> float | None:
         p, r = self.precision, self.recall
-        if not p or not r:
+        if p is None or r is None:
             return None
+        if p + r == 0:
+            return 0.0
         return 2 * p * r / (p + r)
 
 
@@ -213,13 +215,13 @@ def _unit(raw: dict) -> EvalUnit:
         text=raw.get("text", ""),
         demographics={
             k: f
-            for k, v in raw.get("demographics", {}).items()
+            for k, v in (raw.get("demographics") or {}).items()
             if (f := _field(v)) is not None
         },
-        timeline=_list(raw.get("timeline", []), "timeline"),
-        labs=_list(raw.get("labs", []), "labs"),
-        treatments=_list(raw.get("treatments", []), "treatments"),
-        prior_diagnoses=_list(raw.get("prior_diagnoses", []), "prior_diagnoses"),
+        timeline=_list(raw.get("timeline") or [], "timeline"),
+        labs=_list(raw.get("labs") or [], "labs"),
+        treatments=_list(raw.get("treatments") or [], "treatments"),
+        prior_diagnoses=_list(raw.get("prior_diagnoses") or [], "prior_diagnoses"),
         outcome=_field(raw.get("outcome")),
         reason_for_publication=_field(raw.get("reason_for_publication")),
     )

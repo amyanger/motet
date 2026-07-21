@@ -80,6 +80,17 @@ def test_missing_optional_fields_are_none(tmp_path):
     assert unit.prior_diagnoses == []
 
 
+def test_null_category_loads_as_empty_not_a_crash(tmp_path):
+    doc = _doc_dict()
+    doc["units"][0]["demographics"] = None
+    doc["units"][0]["timeline"] = None
+    path = tmp_path / "d.json"
+    path.write_text(json.dumps(doc), encoding="utf-8")
+    unit = load_eval_file(path).units[0]
+    assert unit.demographics == {}
+    assert unit.timeline == []
+
+
 def _f(value, **kw):
     return EvalField(value=value, quote=kw.pop("quote", "q"), **kw)
 
@@ -94,6 +105,14 @@ def test_counts_metrics():
 def test_counts_metrics_are_none_when_undefined():
     assert Counts(tp=0, fp=0, fn=0).precision is None
     assert Counts(tp=0, fp=0, fn=0).recall is None
+    assert Counts(tp=0, fp=0, fn=0).f1 is None
+
+
+def test_f1_is_honest_zero_not_undefined_when_precision_and_recall_are_zero():
+    # tp=0 with both fp and fn present: precision and recall are defined and
+    # both 0.0, so f1 must be a real 0.0, not None (which would print "--").
+    assert Counts(tp=0, fp=3, fn=7).f1 == 0.0
+    # Still None when both denominators are zero (truly undefined).
     assert Counts(tp=0, fp=0, fn=0).f1 is None
 
 

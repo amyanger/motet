@@ -7,8 +7,6 @@ Skips when there is not yet enough scored data.
 
 from pathlib import Path
 
-from vexas.cli import run_eval
-
 FLOOR = 0.5
 
 
