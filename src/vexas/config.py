@@ -20,6 +20,9 @@ class Settings:
         default_factory=lambda: os.getenv("NCBI_API_KEY")
     )
     model: str = "claude-opus-4-8"
+    #: Relevance triage runs on a cheaper model -- it is a 4-way label with a
+    #: supporting quote, not structured extraction.
+    relevance_model: str = "claude-haiku-4-5-20251001"
     cache_dir: Path = PROJECT_ROOT / "data" / "cache"
     data_dir: Path = PROJECT_ROOT / "data"
 

@@ -89,6 +89,10 @@ Output is hypothesis-generating. It is not evidence of treatment effect.
 - **Blind verification.** A second pass judges each surviving field seeing
   only the source text and the claim, never the first pass's reasoning. A
   field it cannot support is dropped.
+- **Relevance triage.** Before extraction, each paper is classified as a VEXAS
+  case report or not. Papers that only mention VEXAS in a differential or a
+  review are excluded and listed with the verbatim quote behind the call, so a
+  false-positive paper never contributes a record to the denominators.
 - **Per-patient segmentation.** Case series are split into one unit per
   patient before extraction, so no prompt ever sees two patients at once and
   details cannot bleed between them.
@@ -119,16 +123,17 @@ motet eval
 
 ## How it works
 
-An eight-stage disk-cached pipeline:
+A nine-stage disk-cached pipeline:
 
 1. **fetch** PMC identifiers and full JATS XML from NCBI E-utilities
-2. **segment** case series into per-patient units
-3. **extract** one Claude call per field category, per patient
-4. **gate** every field against its verbatim quote
-5. **verify** each surviving field with a blind second pass
-6. **normalize** units, ontology terms, and variant nomenclature in code
-7. **aggregate** onset order, treatment response by line, diagnostic odyssey
-8. **serve** a local web UI with click-through traceability to source quotes
+2. **triage** each paper as a VEXAS case report vs a mention-only / review paper
+3. **segment** case series into per-patient units
+4. **extract** one Claude call per field category, per patient
+5. **gate** every field against its verbatim quote
+6. **verify** each surviving field with a blind second pass
+7. **normalize** units, ontology terms, and variant nomenclature in code
+8. **aggregate** onset order, treatment response by line, diagnostic odyssey
+9. **serve** a local web UI with click-through traceability to source quotes
 
 ## Other diseases
 
