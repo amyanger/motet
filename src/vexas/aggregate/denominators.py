@@ -8,8 +8,14 @@ carefully the extraction was done.
 
 `Count` deliberately has no `.percentage` property. Anything trivial to
 emit eventually gets emitted.
+
+`assert_no_overclaim` is a tripwire, not a proof of completeness: it can
+only catch phrasing we thought to list, so it will miss novel overclaims
+worded differently. The real guarantee is structural -- `Count` always
+carries its denominator and has no percentage property.
 """
 
+import re
 from dataclasses import dataclass, field
 
 STANDING_CAVEAT = (
@@ -18,16 +24,31 @@ STANDING_CAVEAT = (
     "features and preferentially publish unusual ones."
 )
 
-FORBIDDEN_PHRASES: frozenset[str] = frozenset({
-    "% of patients",
+# Single-word terms are matched on word boundaries so they don't fire
+# inside a larger innocent word (e.g. "incidence" inside "coincidence",
+# "cures" inside "obscures"). Multi-word phrases are matched as substrings.
+FORBIDDEN_WORDS: frozenset[str] = frozenset({
     "prevalence",
     "incidence",
-    "more effective than",
-    "less effective than",
     "causes",
     "efficacy",
     "cures",
+    "rate",
+})
+
+FORBIDDEN_PHRASES: frozenset[str] = frozenset({
+    "% of patients",
+    "more effective than",
+    "less effective than",
     "leads to remission",
+    "superior to",
+    "inferior to",
+    "outperformed",
+    "worked better than",
+    "resulted in",
+    "due to",
+    "responsible for",
+    "triggered by",
 })
 
 
@@ -37,14 +58,17 @@ class OverclaimError(ValueError):
 
 def assert_no_overclaim(text: str) -> None:
     lowered = text.lower()
+    for word in FORBIDDEN_WORDS:
+        if re.search(rf"\b{re.escape(word)}\b", lowered):
+            raise OverclaimError(
+                f"output contains forbidden word {word!r}: {text!r}"
+            )
     for phrase in FORBIDDEN_PHRASES:
         if phrase in lowered:
             raise OverclaimError(
                 f"output contains forbidden phrase {phrase!r}: {text!r}"
             )
     # Bare percentages are banned outright; counts carry denominators.
-    import re
-
     if re.search(r"\d+\s*%", text):
         raise OverclaimError(f"output contains a bare percentage: {text!r}")
 

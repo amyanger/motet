@@ -52,6 +52,24 @@ def test_legitimate_text_is_accepted(text):
     assert_no_overclaim(text)
 
 
+@pytest.mark.parametrize("text", [
+    "This drug was superior to placebo in this report.",
+    "Symptoms resulted in organ damage.",
+    "the rate of chondritis was high",
+])
+def test_expanded_overclaiming_text_is_rejected(text):
+    with pytest.raises(OverclaimError):
+        assert_no_overclaim(text)
+
+
+@pytest.mark.parametrize("text", [
+    "By coincidence, both patients presented with chondritis.",
+    "The imaging obscures the underlying lesion.",
+])
+def test_word_boundary_false_positives_are_accepted(text):
+    assert_no_overclaim(text)
+
+
 def test_pattern_requires_a_caveat():
     pattern = Pattern(
         title="Chondritis precedes cytopenia",
