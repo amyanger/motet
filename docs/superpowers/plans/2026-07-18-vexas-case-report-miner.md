@@ -106,8 +106,8 @@ The gate is the highest-value component in the system and has no dependencies, s
 - [ ] **Step 1: Create the project skeleton**
 
 ```bash
-mkdir -p /Users/arjunmyanger/Dev/rare-diseases/{src/vexas,tests}
-cd /Users/arjunmyanger/Dev/rare-diseases
+mkdir -p ~/Dev/rare-diseases/{src/vexas,tests}
+cd ~/Dev/rare-diseases
 git init
 python3 -m venv .venv
 .venv/bin/pip install --upgrade pip
@@ -167,7 +167,7 @@ NCBI_API_KEY=
 - [ ] **Step 5: Install dependencies**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 .venv/bin/pip install -e ".[dev]"
 ```
 
@@ -280,7 +280,7 @@ def test_normalize_collapses_runs_of_whitespace():
 - [ ] **Step 9: Run the test to verify it fails**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/test_gate.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/test_gate.py -v
 ```
 
 Expected: FAIL — `ModuleNotFoundError: No module named 'vexas.gate'`
@@ -348,7 +348,7 @@ def is_grounded(quote: str, source: str) -> bool:
 - [ ] **Step 11: Run the test to verify it passes**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/test_gate.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/test_gate.py -v
 ```
 
 Expected: PASS, 10 passed
@@ -356,7 +356,7 @@ Expected: PASS, 10 passed
 - [ ] **Step 12: Commit**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 git add pyproject.toml .gitignore .env.example src/vexas/__init__.py src/vexas/config.py src/vexas/gate.py tests/test_gate.py
 git commit -m "Add substring gate for verbatim quote validation
 
@@ -485,7 +485,7 @@ def test_patient_record_requires_pmid_and_patient_id():
 - [ ] **Step 2: Run the test to verify it fails**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/test_schema.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/test_schema.py -v
 ```
 
 Expected: FAIL — `ModuleNotFoundError: No module named 'vexas.schema'`
@@ -619,7 +619,7 @@ class PatientRecord(BaseModel):
 - [ ] **Step 4: Run the test to verify it passes**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/test_schema.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/test_schema.py -v
 ```
 
 Expected: PASS, 10 passed
@@ -627,7 +627,7 @@ Expected: PASS, 10 passed
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 git add src/vexas/schema.py tests/test_schema.py
 git commit -m "Add extraction schema with three assertion axes
 
@@ -710,7 +710,7 @@ def test_unicode_survives_roundtrip(cache):
 - [ ] **Step 2: Run the test to verify it fails**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/test_cache.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/test_cache.py -v
 ```
 
 Expected: FAIL — `ModuleNotFoundError: No module named 'vexas.cache'`
@@ -776,7 +776,7 @@ class DiskCache:
 - [ ] **Step 4: Run the test to verify it passes**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/test_cache.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/test_cache.py -v
 ```
 
 Expected: PASS, 7 passed
@@ -784,7 +784,7 @@ Expected: PASS, 7 passed
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 git add src/vexas/cache.py tests/test_cache.py
 git commit -m "Add namespaced disk cache with atomic writes
 
@@ -842,7 +842,7 @@ def test_parse_id_list_handles_empty_result():
 - [ ] **Step 2: Run the test to verify it fails**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/fetch/test_pubmed.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/fetch/test_pubmed.py -v
 ```
 
 Expected: FAIL — `ModuleNotFoundError: No module named 'vexas.fetch'`
@@ -902,7 +902,7 @@ def search_pmc_ids(query: str | None = None, retmax: int = 500) -> list[str]:
 - [ ] **Step 5: Run the test to verify it passes**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/fetch/test_pubmed.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/fetch/test_pubmed.py -v
 ```
 
 Expected: PASS, 4 passed
@@ -910,7 +910,7 @@ Expected: PASS, 4 passed
 - [ ] **Step 6: Verify against the live API and confirm the corpus size**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/python -c "
+cd ~/Dev/rare-diseases && .venv/bin/python -c "
 from vexas.fetch.pubmed import search_pmc_ids
 ids = search_pmc_ids()
 print('corpus size:', len(ids))
@@ -923,7 +923,7 @@ Expected: `corpus size: 197` (±a few as PMC grows). If it is dramatically lower
 - [ ] **Step 7: Commit**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 git add src/vexas/fetch/__init__.py src/vexas/fetch/pubmed.py tests/fetch/
 git commit -m "Add PMC identifier search via E-utilities
 
@@ -1041,7 +1041,7 @@ def test_quotes_from_sections_survive_the_gate(xml):
 - [ ] **Step 3: Run the test to verify it fails**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/fetch/test_pmc.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/fetch/test_pmc.py -v
 ```
 
 Expected: FAIL — `ModuleNotFoundError: No module named 'vexas.fetch.pmc'`
@@ -1160,7 +1160,7 @@ def fetch_full_text(pmc_id: str) -> str:
 - [ ] **Step 5: Run the test to verify it passes**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/fetch/test_pmc.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/fetch/test_pmc.py -v
 ```
 
 Expected: PASS, 6 passed
@@ -1168,7 +1168,7 @@ Expected: PASS, 6 passed
 - [ ] **Step 6: Download the real corpus**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/python -c "
+cd ~/Dev/rare-diseases && .venv/bin/python -c "
 from vexas.fetch.pubmed import search_pmc_ids
 from vexas.fetch.pmc import fetch_full_text, parse_article
 ids = search_pmc_ids()
@@ -1191,7 +1191,7 @@ Expected: most articles parse with sections. Record the number that yield no sec
 - [ ] **Step 7: Commit**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 git add src/vexas/fetch/pmc.py tests/fetch/test_pmc.py tests/fixtures/
 git commit -m "Add PMC full-text fetch with JATS section parsing
 
@@ -1269,7 +1269,7 @@ def test_pmid_falls_back_to_pmc_id_when_absent():
 - [ ] **Step 2: Run the test to verify it fails**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/test_segment.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/test_segment.py -v
 ```
 
 Expected: FAIL — `ModuleNotFoundError: No module named 'vexas.segment'`
@@ -1322,7 +1322,7 @@ def split_patients(article: Article, unit_texts: list[str]) -> list[PatientUnit]
 - [ ] **Step 4: Run the test to verify it passes**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/test_segment.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/test_segment.py -v
 ```
 
 Expected: PASS, 5 passed
@@ -1330,7 +1330,7 @@ Expected: PASS, 5 passed
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 git add src/vexas/segment.py tests/test_segment.py
 git commit -m "Add per-patient segmentation
 
@@ -1475,7 +1475,7 @@ def test_handles_nested_braces():
 - [ ] **Step 2: Run the tests to verify they fail**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/extract/ -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/extract/ -v
 ```
 
 Expected: FAIL — `ModuleNotFoundError: No module named 'vexas.extract'`
@@ -1823,7 +1823,7 @@ def _log_cache_usage(message) -> None:
 - [ ] **Step 6: Run the tests to verify they pass**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/extract/ -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/extract/ -v
 ```
 
 Expected: PASS, 12 passed
@@ -1831,7 +1831,7 @@ Expected: PASS, 12 passed
 - [ ] **Step 7: Commit**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 git add src/vexas/extract/ tests/extract/
 git commit -m "Add per-category extraction prompts and Claude client
 
@@ -1956,7 +1956,7 @@ def test_extract_unit_builds_a_record_from_stubbed_responses():
 - [ ] **Step 2: Run the test to verify it fails**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/extract/test_runner.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/extract/test_runner.py -v
 ```
 
 Expected: FAIL — `ModuleNotFoundError: No module named 'vexas.extract.runner'`
@@ -2142,7 +2142,7 @@ def extract_unit(unit: PatientUnit, complete=complete_json):
 - [ ] **Step 4: Run the test to verify it passes**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/extract/test_runner.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/extract/test_runner.py -v
 ```
 
 Expected: PASS, 8 passed
@@ -2150,7 +2150,7 @@ Expected: PASS, 8 passed
 - [ ] **Step 5: Run the full suite to check for regressions**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest -v
 ```
 
 Expected: all tests pass
@@ -2158,7 +2158,7 @@ Expected: all tests pass
 - [ ] **Step 6: Smoke-test against one real article**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/python -c "
+cd ~/Dev/rare-diseases && .venv/bin/python -c "
 from vexas.fetch.pubmed import search_pmc_ids
 from vexas.fetch.pmc import fetch_full_text, parse_article
 from vexas.segment import split_patients
@@ -2182,7 +2182,7 @@ Expected: a rejection rate under roughly 20%. If it is much higher, inspect the 
 - [ ] **Step 7: Commit**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 git add src/vexas/extract/runner.py tests/extract/test_runner.py
 git commit -m "Add extraction runner applying the gate before parsing
 
@@ -2299,7 +2299,7 @@ def test_api_failure_defaults_to_unsupported():
 - [ ] **Step 2: Run the test to verify it fails**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/test_verify.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/test_verify.py -v
 ```
 
 Expected: FAIL — `ModuleNotFoundError: No module named 'vexas.verify'`
@@ -2399,7 +2399,7 @@ def verify_field(field_name: str, field: GroundedField, source: str,
 - [ ] **Step 4: Run the test to verify it passes**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/test_verify.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/test_verify.py -v
 ```
 
 Expected: PASS, 7 passed
@@ -2407,7 +2407,7 @@ Expected: PASS, 7 passed
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 git add src/vexas/verify.py tests/test_verify.py
 git commit -m "Add blind verification pass
 
@@ -2493,7 +2493,7 @@ def test_unknown_unit_returns_none():
 - [ ] **Step 2: Run the test to verify it fails**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/normalize/test_units.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/normalize/test_units.py -v
 ```
 
 Expected: FAIL — `ModuleNotFoundError: No module named 'vexas.normalize'`
@@ -2587,7 +2587,7 @@ def convert(analyte: str, value: float, unit: str) -> tuple[float, str] | None:
 - [ ] **Step 5: Run the test to verify it passes**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/normalize/test_units.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/normalize/test_units.py -v
 ```
 
 Expected: PASS, 12 passed
@@ -2595,7 +2595,7 @@ Expected: PASS, 12 passed
 - [ ] **Step 6: Commit**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 git add src/vexas/normalize/__init__.py src/vexas/normalize/units.py tests/normalize/
 git commit -m "Add deterministic unit conversion
 
@@ -2689,7 +2689,7 @@ def test_rxnorm_miss_returns_none():
 - [ ] **Step 2: Run the test to verify it fails**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/normalize/test_ontology.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/normalize/test_ontology.py -v
 ```
 
 Expected: FAIL — `ModuleNotFoundError: No module named 'vexas.normalize.ontology'`
@@ -2806,7 +2806,7 @@ def lookup_rxnorm(drug: str) -> OntologyTerm | None:
 - [ ] **Step 4: Run the test to verify it passes**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/normalize/test_ontology.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/normalize/test_ontology.py -v
 ```
 
 Expected: PASS, 8 passed
@@ -2814,7 +2814,7 @@ Expected: PASS, 8 passed
 - [ ] **Step 5: Verify against the live APIs**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/python -c "
+cd ~/Dev/rare-diseases && .venv/bin/python -c "
 from vexas.normalize.ontology import search_hpo, lookup_rxnorm
 for term in search_hpo('ear chondritis', limit=3):
     print(term.term_id, '-', term.label)
@@ -2828,7 +2828,7 @@ Expected: real HP: identifiers, and `RxCUI:1193326` for ruxolitinib.
 - [ ] **Step 6: Commit**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 git add src/vexas/normalize/ontology.py tests/normalize/test_ontology.py
 git commit -m "Add ontology mapping with identifier validation
 
@@ -2894,7 +2894,7 @@ def test_cdna_change_without_splice_context_returns_none():
 - [ ] **Step 2: Run the test to verify it fails**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/normalize/test_hgvs.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/normalize/test_hgvs.py -v
 ```
 
 Expected: FAIL — `ModuleNotFoundError: No module named 'vexas.normalize.hgvs'`
@@ -2965,7 +2965,7 @@ def normalize_variant(raw: str) -> str | None:
 - [ ] **Step 4: Run the test to verify it passes**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/normalize/test_hgvs.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/normalize/test_hgvs.py -v
 ```
 
 Expected: PASS, 11 passed
@@ -2973,7 +2973,7 @@ Expected: PASS, 11 passed
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 git add src/vexas/normalize/hgvs.py tests/normalize/test_hgvs.py
 git commit -m "Add UBA1 variant normalization
 
@@ -3077,7 +3077,7 @@ def test_pattern_summary_passes_the_overclaim_guard():
 - [ ] **Step 2: Run the test to verify it fails**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/aggregate/test_denominators.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/aggregate/test_denominators.py -v
 ```
 
 Expected: FAIL — `ModuleNotFoundError: No module named 'vexas.aggregate'`
@@ -3198,7 +3198,7 @@ class Pattern:
 - [ ] **Step 5: Run the test to verify it passes**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/aggregate/test_denominators.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/aggregate/test_denominators.py -v
 ```
 
 Expected: PASS, 13 passed
@@ -3206,7 +3206,7 @@ Expected: PASS, 13 passed
 - [ ] **Step 6: Commit**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 git add src/vexas/aggregate/ tests/aggregate/
 git commit -m "Add claims-discipline guard
 
@@ -3338,7 +3338,7 @@ def test_patterns_sorted_by_support_descending():
 - [ ] **Step 2: Run the test to verify it fails**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/aggregate/test_sequence.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/aggregate/test_sequence.py -v
 ```
 
 Expected: FAIL — `ModuleNotFoundError: No module named 'vexas.aggregate.sequence'`
@@ -3434,7 +3434,7 @@ def rank_precedence(records: list[PatientRecord],
 - [ ] **Step 4: Run the test to verify it passes**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/aggregate/test_sequence.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/aggregate/test_sequence.py -v
 ```
 
 Expected: PASS, 11 passed
@@ -3442,7 +3442,7 @@ Expected: PASS, 11 passed
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 git add src/vexas/aggregate/sequence.py tests/aggregate/test_sequence.py
 git commit -m "Add onset sequence aggregation
 
@@ -3608,7 +3608,7 @@ def test_rank_by_line_respects_min_support():
 - [ ] **Step 2: Run the test to verify it fails**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/aggregate/test_treatment.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/aggregate/test_treatment.py -v
 ```
 
 Expected: FAIL — `ModuleNotFoundError: No module named 'vexas.aggregate.treatment'`
@@ -3754,7 +3754,7 @@ def rank_by_line(records: list[PatientRecord],
 - [ ] **Step 4: Run the test to verify it passes**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/aggregate/test_treatment.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/aggregate/test_treatment.py -v
 ```
 
 Expected: PASS, 11 passed
@@ -3762,7 +3762,7 @@ Expected: PASS, 11 passed
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 git add src/vexas/aggregate/treatment.py tests/aggregate/test_treatment.py
 git commit -m "Add treatment response by line of therapy
 
@@ -3875,7 +3875,7 @@ def test_diagnostic_delays_skips_unknown_units():
 - [ ] **Step 2: Run the test to verify it fails**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/aggregate/test_odyssey.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/aggregate/test_odyssey.py -v
 ```
 
 Expected: FAIL — `ModuleNotFoundError: No module named 'vexas.aggregate.odyssey'`
@@ -4000,7 +4000,7 @@ def diagnostic_delays(records: list[PatientRecord]) -> list[tuple[str, float]]:
 - [ ] **Step 4: Run the test to verify it passes**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/aggregate/test_odyssey.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/aggregate/test_odyssey.py -v
 ```
 
 Expected: PASS, 10 passed
@@ -4008,7 +4008,7 @@ Expected: PASS, 10 passed
 - [ ] **Step 5: Commit**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 git add src/vexas/aggregate/odyssey.py tests/aggregate/test_odyssey.py
 git commit -m "Add diagnostic odyssey aggregation
 
@@ -4086,7 +4086,7 @@ def test_empty_input_yields_no_counts():
 - [ ] **Step 2: Run the test to verify it fails**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/test_validate.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/test_validate.py -v
 ```
 
 Expected: FAIL — `ModuleNotFoundError: No module named 'vexas.validate'`
@@ -4208,7 +4208,7 @@ def test_article_without_sections_yields_no_records():
 - [ ] **Step 5: Run the tests to verify they fail**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/test_pipeline.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/test_pipeline.py -v
 ```
 
 Expected: FAIL — `ModuleNotFoundError: No module named 'vexas.pipeline'`
@@ -4302,7 +4302,7 @@ def run(limit: int | None = None) -> PipelineResult:
 - [ ] **Step 7: Run the tests to verify they pass**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/test_pipeline.py tests/test_validate.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/test_pipeline.py tests/test_validate.py -v
 ```
 
 Expected: PASS, 8 passed
@@ -4310,7 +4310,7 @@ Expected: PASS, 8 passed
 - [ ] **Step 8: Run the pipeline on ten articles as a checkpoint**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/python -c "
+cd ~/Dev/rare-diseases && .venv/bin/python -c "
 from vexas.pipeline import run
 from vexas.aggregate.sequence import rank_precedence
 from vexas.aggregate.treatment import rank_by_line
@@ -4337,7 +4337,7 @@ Expected: real records, a gate rejection rate under roughly 20%, and at least on
 - [ ] **Step 9: Run the full corpus**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/python -c "
+cd ~/Dev/rare-diseases && .venv/bin/python -c "
 from vexas.pipeline import run
 result = run()
 print('records:', len(result.records))
@@ -4350,7 +4350,7 @@ print('gate rejection rate: %.1f%%' % (result.gate_stats.rejection_rate * 100))
 - [ ] **Step 10: Commit**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 git add src/vexas/pipeline.py src/vexas/validate.py tests/test_pipeline.py tests/test_validate.py
 git commit -m "Add end-to-end pipeline and genotype validation check
 
@@ -4454,7 +4454,7 @@ def test_out_of_range_pattern_index_returns_404(client):
 - [ ] **Step 2: Run the test to verify it fails**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/web/test_app.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/web/test_app.py -v
 ```
 
 Expected: FAIL — `ModuleNotFoundError: No module named 'vexas.web'`
@@ -4653,7 +4653,7 @@ Every claim is traceable to a verbatim source quote.</p>
 - [ ] **Step 8: Run the test to verify it passes**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/web/test_app.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/web/test_app.py -v
 ```
 
 Expected: PASS, 8 passed
@@ -4686,7 +4686,7 @@ if __name__ == "__main__":
 - [ ] **Step 10: Run the full suite and launch**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest -v && .venv/bin/python run_web.py
+cd ~/Dev/rare-diseases && .venv/bin/pytest -v && .venv/bin/python run_web.py
 ```
 
 Expected: all tests pass, server starts on port 5001. Open http://localhost:5001 in Safari.
@@ -4694,7 +4694,7 @@ Expected: all tests pass, server starts on port 5001. Open http://localhost:5001
 - [ ] **Step 11: Commit**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 git add src/vexas/web/ tests/web/ run_web.py
 git commit -m "Add web UI with clickable traceability
 
@@ -4808,7 +4808,7 @@ def test_estimate_does_not_require_an_api_key(monkeypatch):
 - [ ] **Step 2: Run the test to verify it fails**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/test_cli.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/test_cli.py -v
 ```
 
 Expected: FAIL — `ModuleNotFoundError: No module named 'vexas.cli'`
@@ -5051,7 +5051,7 @@ if __name__ == "__main__":
 - [ ] **Step 4: Run the test to verify it passes**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pytest tests/test_cli.py -v
+cd ~/Dev/rare-diseases && .venv/bin/pytest tests/test_cli.py -v
 ```
 
 Expected: PASS, 10 passed
@@ -5068,7 +5068,7 @@ vexas = "vexas.cli:main"
 Then reinstall so the command is available:
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases && .venv/bin/pip install -e ".[dev]"
+cd ~/Dev/rare-diseases && .venv/bin/pip install -e ".[dev]"
 ```
 
 - [ ] **Step 6: Write `README.md`**
@@ -5191,7 +5191,7 @@ if __name__ == "__main__":
 - [ ] **Step 8: Verify the CLI end to end**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 .venv/bin/vexas check
 .venv/bin/vexas estimate --limit 10
 .venv/bin/pytest -v
@@ -5204,7 +5204,7 @@ suite passes.
 - [ ] **Step 9: Commit**
 
 ```bash
-cd /Users/arjunmyanger/Dev/rare-diseases
+cd ~/Dev/rare-diseases
 git add src/vexas/cli.py tests/test_cli.py README.md pyproject.toml run_web.py
 git commit -m "Add CLI with cost estimation and bring-your-own-key setup
 
